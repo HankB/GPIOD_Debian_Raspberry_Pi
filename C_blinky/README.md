@@ -27,6 +27,7 @@ Monitor an event for GPIO 7 (button press.) Things I learned.
 1. Event callback, first arg is event - 2 => rising edge, 3 => falling edge
 1. Event callback, second arg is GPIO #. Zero means a timeout.
 1. Event callback, returns 0, polling continues. Return 1, `gpiod_ctxless_event_monitor()` returns.
+1. The event mechanism does not consume a processor core. IOW, interrupt driven and not continuous polling.
 
 Build:
 
