@@ -1,6 +1,9 @@
 # Prerequisites
 *.d
 
+# Executables
+read
+
 # Object files
 *.o
 *.ko
