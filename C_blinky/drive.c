@@ -11,7 +11,8 @@ Build:
 
 const unsigned int gpio = 8;
 
-void set_cb(void * unused) {
+void set_cb(void *unused)
+{
     sleep(1);
 }
 
