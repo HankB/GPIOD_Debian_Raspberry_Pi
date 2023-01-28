@@ -98,7 +98,7 @@ There does not appear to be a way to have `gpioset` leave the GPIO configured on
 
 ## `gpimon`
 
-Conneting a momentary pushbutton between GPIO 7 and ground shows just how boiuncy the switch is. For example one press close (short) and one release (open) produces the following events. And all events are not captured.
+Conneting a momentary pushbutton between GPIO 7 and ground shows just how bouncy the switch is. For example one press close (short) and one release (open) produces the following events. And all events are not captured.
 
 ```text
 hbarta@bullpi3b:~$ gpiomon  /dev/gpiochip0 7
