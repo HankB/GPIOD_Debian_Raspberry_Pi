@@ -12,4 +12,4 @@ The library previously used was [WiringPi](http://wiringpi.com/) and which seems
 
 Work in progress
 
-CLI examples provided.
+CLI examples provided. Work started on C examples using the "high level APIs."
