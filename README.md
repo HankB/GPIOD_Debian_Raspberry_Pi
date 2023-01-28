@@ -11,3 +11,5 @@ The library previously used was [WiringPi](http://wiringpi.com/) and which seems
 ## Status 
 
 Work in progress
+
+CLI examples provided.
