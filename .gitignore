@@ -3,6 +3,11 @@
 
 # Executables
 read
+drive
+
+# VS Code cruft
+.vscode/
+
 
 # Object files
 *.o
