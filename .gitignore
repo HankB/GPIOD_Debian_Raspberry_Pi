@@ -4,6 +4,7 @@
 # Executables
 read
 drive
+event
 
 # VS Code cruft
 .vscode/
