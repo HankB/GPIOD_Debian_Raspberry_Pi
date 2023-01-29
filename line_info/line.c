@@ -40,9 +40,22 @@ int main(int argc, char **argv)
     for(int i=0; i< bulk.num_lines; i++)
     {
         unsigned int offset = gpiod_line_offset(bulk.lines[i]);
-        printf("Offset of name %s is %d\n", names[i], offset);
+        printf("Offset of      %s is %d\n", names[i], offset);
+
         int state = gpiod_line_active_state(bulk.lines[i]);
-        printf("Hi/lo state of name %s is %d\n", names[i], state);
+        printf("Hi/lo state of %s is %d\n", names[i], state);
+
+        int bias = gpiod_line_bias(bulk.lines[i]);
+        printf("Bias of        %s is %d\n", names[i], bias);
+
+        const char * consumer = gpiod_line_consumer(bulk.lines[i]);
+        printf("Consumer of    %s is %s\n", names[i], consumer);
+
+        int direction = gpiod_line_direction(bulk.lines[i]);
+        printf("Direction of   %s is %d\n", names[i], direction);
+
+        bool used = gpiod_line_is_used(bulk.lines[i]);
+        printf("Is             %s used %s\n", names[i], used?"yes":"no");
 
         printf("\n");
     }
