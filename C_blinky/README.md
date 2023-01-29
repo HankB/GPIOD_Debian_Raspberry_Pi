@@ -42,3 +42,7 @@ Drive a GPIO pin when a pushbutton is pressed. This is done in the event callbac
 ```text
 gcc -Wall -o event_drive event_drive.c -l gpiod
 ```
+
+## Status
+
+This wraps up the portions of the [High-level API](https://libgpiod.readthedocs.io/en/latest/group__high__level.html) that interest.
