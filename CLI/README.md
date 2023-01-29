@@ -13,28 +13,6 @@ The `gpiod` package includes the following commands as listed by `dpkg -L gpiod`
 
 The `man` pages for these commands are pretty terse. Some information and examples are found at <https://lloydrochester.com/post/hardware/libgpiod-intro-rpi/>
 
-## GPIO access
-
-On Debian the GPIO devices are owned by `root` and commands that access them thus require root. I have temporarily fixed that by adding the `gpio` group to `/etc/group` and changing the ownership and permissions for the device nodes. (The `/etc/group` entry is copied from Raspbian.)
-
-```text
-sudo vim /etc/group
-sudo chown root.gpio /dev/gpiochip0
-sudo chmod g+rw /dev/gpiochip0
-```
-
-with the result
-
-```text
-hbarta@bullpi3b:~$ grep gpio /etc/group
-gpio:x:997:hbarta
-hbarta@bullpi3b:~$ ls -l /dev/gpiochip0
-crw-rw---- 1 root gpio 254, 0 Aug  7 08:25 /dev/gpiochip0
-hbarta@bullpi3b:~$ 
-```
-
-`gpioinfo` et al now report results w/out the need for root access.
-
 ## `gpiodetect`
 
 ```text
