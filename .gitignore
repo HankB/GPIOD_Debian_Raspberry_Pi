@@ -7,6 +7,7 @@ drive
 event
 event_drive
 chip
+line
 
 # VS Code cruft
 .vscode/
