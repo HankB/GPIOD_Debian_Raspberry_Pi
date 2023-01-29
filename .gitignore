@@ -5,6 +5,7 @@
 read
 drive
 event
+event_drive
 
 # VS Code cruft
 .vscode/

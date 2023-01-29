@@ -34,3 +34,11 @@ Build:
 ```text
 gcc -Wall -o event event.c -l gpiod
 ```
+
+## `event_drive`
+
+Drive a GPIO pin when a pushbutton is pressed. This is done in the event callback and the call to drive the output itself has a callback to provide timing. It's callbacks all the way down! In particular I wonder if calling another API within the callback is legal. It seems to work w/out difficulty. Judging by the behavior, a noisy pushbutton input may be calling the event callback when a previous callback has not yet returned. Or maybe they are just firing in sequence.
+
+```text
+gcc -Wall -o event_drive event_drive.c -l gpiod
+```
