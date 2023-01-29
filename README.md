@@ -14,8 +14,8 @@ On Debian the GPIO devices are owned by `root` and commands that access them thu
 
 ```text
 sudo vim /etc/group
-sudo chown root.gpio /dev/gpiochip0
-sudo chmod g+rw /dev/gpiochip0
+sudo chown root.gpio /dev/gpiochip?
+sudo chmod g+rw /dev/gpiochip?
 ```
 
 with the result
