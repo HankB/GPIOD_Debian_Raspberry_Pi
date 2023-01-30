@@ -8,6 +8,7 @@ event
 event_drive
 chip
 line
+line_rqst
 
 # VS Code cruft
 .vscode/
