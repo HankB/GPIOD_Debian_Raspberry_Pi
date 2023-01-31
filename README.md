@@ -46,4 +46,5 @@ Work in progress working through first CLI commands then various protions of the
 |High-level API|<https://libgpiod.readthedocs.io/en/latest/group__high__level.html>|`C_blinky`|done|
 |GPIO chip operations|<https://libgpiod.readthedocs.io/en/latest/group__chips.html>|`chip_operations`|done|
 |Line info|<https://libgpiod.readthedocs.io/en/latest/group__line__info.html>|`line_info`|done|
-|Line requests|<https://libgpiod.readthedocs.io/en/latest/group__line__request.html>|`line_rqst`|next|
+|Line requests|<https://libgpiod.readthedocs.io/en/latest/group__line__request.html>|`line_rqst`|done|
+|Setting line configuration|<https://libgpiod.readthedocs.io/en/latest/group__line__config.html>|`line_cfg`|done|
