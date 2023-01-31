@@ -10,6 +10,7 @@ chip
 line
 line_rqst
 line_cfg
+read_write
 
 # VS Code cruft
 .vscode/

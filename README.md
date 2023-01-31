@@ -48,3 +48,4 @@ Work in progress working through first CLI commands then various protions of the
 |Line info|<https://libgpiod.readthedocs.io/en/latest/group__line__info.html>|`line_info`|done|
 |Line requests|<https://libgpiod.readthedocs.io/en/latest/group__line__request.html>|`line_request`|done|
 |Setting line configuration|<https://libgpiod.readthedocs.io/en/latest/group__line__config.html>|`line_config`|done|
+|Reading & setting line values|<https://libgpiod.readthedocs.io/en/latest/group__line__value.html>|`line_IO`|next|
