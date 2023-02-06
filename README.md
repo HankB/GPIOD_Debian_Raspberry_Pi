@@ -10,9 +10,9 @@ The library previously used was [WiringPi](http://wiringpi.com/) and which seems
 
 ## References
 
-Archived Github repo <https://github.com/brgl/libgpiod>
-Current kernel repo <https://git.kernel.org/pub/scm/libs/libgpiod/libgpiod.git/>
-`libgpiod` `doxygen` docs <https://libgpiod.readthedocs.io/en/latest/index.html>
+Archived Github repo <https://github.com/brgl/libgpiod>  
+Current kernel repo <https://git.kernel.org/pub/scm/libs/libgpiod/libgpiod.git/>  
+`libgpiod` `doxygen` docs <https://libgpiod.readthedocs.io/en/latest/index.html>  
 
 ## GPIO access
 
