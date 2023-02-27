@@ -4,12 +4,11 @@ Finally get to play with I/O using APIs described at <https://libgpiod.readthedo
 
 The same LED setup was used as with [line config](../line_config/README.md)
 
-# `read_write`
+## `read_write`
 
 ```text
 gcc -Wall -o read_write read_write.c -l gpiod
 ```
-
 
 Clone of `../line_config/line_cfg.c` with the following changes.
 
