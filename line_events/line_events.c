@@ -9,30 +9,7 @@ Build
 #include <gpiod.h>
 #include <unistd.h>
 
-/*
-void report_line_attributes(struct gpiod_line *line, const char *name)
-{
-    bool is_free = gpiod_line_is_free(line);
-    printf("Is free        %s is %s\n", name, is_free ? "yes" : "no");
-    bool is_requested = gpiod_line_is_requested(line);
-    printf("Is requested   %s is %s\n", name, is_requested ? "yes" : "no");
-
-    int bias = gpiod_line_bias(line);
-    printf("Bias of        %s is %d\n", name, bias);
-
-    const char *consumer = gpiod_line_consumer(line);
-    printf("Consumer of    %s is %s\n", name, consumer);
-
-    int direction = gpiod_line_direction(line);
-    printf("Direction of   %s is %d\n", name, direction);
-
-    bool used = gpiod_line_is_used(line);
-    printf("Is             %s used %s\n", name, used ? "yes" : "no");
-
-    int value = gpiod_line_get_value(line);
-    printf("Value          %s is %d\n", name, value );
-}
-*/
+static const char* consumer = "line_events";
 
 int main(int argc, char **argv)
 {
@@ -44,7 +21,7 @@ int main(int argc, char **argv)
         return 1;
     }
 
-    // acquire & configure GPIO 8 (output) GPIO 11 (input)
+    // acquire & configure GPIO 8 (output) GPIO 11 (events)
 
     struct gpiod_line *gpio_8, *gpio_11;
 
@@ -58,7 +35,7 @@ int main(int argc, char **argv)
 
     // configure GPIO_8 for output
     struct gpiod_line_request_config config =
-        {"line_cfg",
+        {consumer,
          GPIOD_LINE_REQUEST_DIRECTION_OUTPUT,
          0};
 
@@ -76,22 +53,24 @@ int main(int argc, char **argv)
     gpio_11 = gpiod_chip_get_line(chip, 11);
     if (rc < 0)
     {
-        perror("               gpiod_line_event_wait(gpio_11)");
+        perror("               gpiod_chip_get_line(gpio_11)");
         return -1;
     }
-    rc = gpiod_line_request_falling_edge_events(gpio_11, "line_cfg");
+
+    rc = gpiod_line_request_both_edges_events(gpio_11, consumer);
+    if (rc < 0)
+    {
+        perror("               gpiod_line_request_both_edges_events(gpio_11)");
+        return -1;
+    }
+
+    const struct timespec timeout = {0, 1000000}; // 0ns, 5s
+    rc = gpiod_line_event_wait(gpio_11, &timeout);
     if (rc < 0)
     {
         perror("               gpiod_line_event_wait(gpio_11)");
         return -1;
     }
-
-    const struct timespec timeout = {0, 1000000}; // 0ns, 5s
-    do
-    {
-        rc = gpiod_line_event_wait(gpio_11, &timeout);
-
-    } while (rc <= 0);
     
     {
         struct gpiod_line_event event;
