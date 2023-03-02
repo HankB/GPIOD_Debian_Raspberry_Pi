@@ -38,6 +38,8 @@ hbarta@bullpi3b:~$
 
 ## Status 
 
+Complete unless the need for further exploration is encountered.
+
 Work in progress working through first CLI commands then various protions of the [libgpiod](https://libgpiod.readthedocs.io/en/latest/index.html) (`doxygen`) documentation.
 
 |name|Doc page|dir|status|
@@ -49,4 +51,4 @@ Work in progress working through first CLI commands then various protions of the
 |Line requests|<https://libgpiod.readthedocs.io/en/latest/group__line__request.html>|`line_request`|done|
 |Setting line configuration|<https://libgpiod.readthedocs.io/en/latest/group__line__config.html>|`line_config`|done|
 |Reading & setting line values|<https://libgpiod.readthedocs.io/en/latest/group__line__value.html>|`line_IO`|done|
-|Line events handling|<https://libgpiod.readthedocs.io/en/latest/group__line__event.html>|`line_events`|in progress|
+|Line events handling|<https://libgpiod.readthedocs.io/en/latest/group__line__event.html>|`line_events`|done|
