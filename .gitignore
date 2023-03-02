@@ -11,6 +11,7 @@ line
 line_rqst
 line_cfg
 read_write
+line_events
 
 # VS Code cruft
 .vscode/
