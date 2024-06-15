@@ -6,7 +6,13 @@ Explore GPIOD on Raspberry Pi running Debian Linux
 
 Recent explorations demonstrate that Debian (not Debian based Raspberry Pi OS - R-Pi OS) runs well on the Pi Zero and Pi 3B+. One question regarding this is the usability of GPIO which is one of the useful capabilities of the Raspberry Pi.
 
-The library previously used was [WiringPi](http://wiringpi.com/) and which seems to be languishing. It's been set aside by its original developer and what seems like the [most popular fork](https://github.com/WiringPi/WiringPi) has not received an update in nearly a year. Along with looking at GPIO on the Pi, this project will use `gpiod` to explore GPIO including both shell commands and C/C++ programs.
+## GPIO libraries
+
+Here is a brief survey of the current situation WRT GPIO libraries (and specifically for programs written in C.)
+
+* `WiringPi` [WiringPi](http://wiringpi.com/) was the most popular but appears to have been abandoned by the original developer. There is a popular fork that appears to be under active development by volunteers. They claim [We're not dead yet!](https://github.com/WiringPi/WiringPi/discussions/202) but a year ago it looked like it was languishing.
+* `gpiod` and `lg` also looked good, but the dev (Joan) got tired of trying to keep up with kernel changes and these seem to be languishing. (<https://github.com/joan2937/pigpio>, <https://github.com/joan2937/lg>)
+* `lobgpiod` seems to be the heir apparent, available for both Debian and RpiOS. But the fly in the ointment is that there is a V2 avaiable, but not for us. 
 
 ## References
 
