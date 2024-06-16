@@ -8,17 +8,30 @@ Recent explorations demonstrate that Debian (not Debian based Raspberry Pi OS - 
 
 ## GPIO libraries
 
-Here is a brief survey of the current situation WRT GPIO libraries (and specifically for programs written in C.)
+Here is a brief survey of the current situation WRT GPIO libraries (and specifically for programs written in C) as of 2024-06-16.
 
 * `WiringPi` [WiringPi](http://wiringpi.com/) was the most popular but appears to have been abandoned by the original developer. There is a popular fork that appears to be under active development by volunteers. They claim [We're not dead yet!](https://github.com/WiringPi/WiringPi/discussions/202) but a year ago it looked like it was languishing.
 * `gpiod` and `lg` also looked good, but the dev (Joan) got tired of trying to keep up with kernel changes and these seem to be languishing. (<https://github.com/joan2937/pigpio>, <https://github.com/joan2937/lg>)
-* `lobgpiod` seems to be the heir apparent, available for both Debian and RpiOS. But the fly in the ointment is that there is a V2 avaiable, but not for us. 
+* `libgpiod` seems to be the heir apparent, available for both Debian and RpiOS. But the fly in the ointment is that there is a V2 avaiable, but not for us. At present V2 is only available on Debian in the experimental repo. There has been mention in the RpiOS forums that the entineers would like to backport V2 to RpiOS but that has not yet happened.
+
+## Plan
+
+Configure a Pi CM4 on a board with GPIO pins (Bicool Mini-base) and connect an LED that can be driven and a pushbutton that can be sampled to support the tests.
+
+TODO: circuit diagram/description of circuit.
+
+## Requirements
+
+* Install the following packages `gpiod libgpiod-dev libgpiod-doc libgpiod2`. (`libgpiod2` is confusingly named as it is for version 1.6.2 of the library.) The document links in the READMEs all reference the on-disk documentation.
 
 ## References
 
-Archived Github repo <https://github.com/brgl/libgpiod>  
-Current kernel repo <https://git.kernel.org/pub/scm/libs/libgpiod/libgpiod.git/>  
-`libgpiod` `doxygen` docs <https://libgpiod.readthedocs.io/en/latest/index.html>  
+This exploration proceeds with the version of `libgpiod` presently available for Debian/RpiOS. The online documentation seems to reference the V2 library whereas V 1.6 is found in the repos.
+
+* Github repo <https://github.com/brgl/libgpiod> (V2)
+* Current kernel repo <https://git.kernel.org/pub/scm/libs/libgpiod/libgpiod.git/>
+* `libgpiod` `doxygen` docs <https://libgpiod.readthedocs.io/en/latest/index.html> (V2)
+* `libgpiod` `doxygen` docs <file:///usr/share/doc/libgpiod-dev/html/index.html> V1, on local dosk.
 
 ## GPIO access
 
@@ -44,17 +57,21 @@ hbarta@bullpi3b:~$
 
 ## Status 
 
-Complete unless the need for further exploration is encountered.
+Once again as work in progress (as of 2024-06-15)
+
+Complete unless the need for further exploration is encountered. That need came up when looking for a better way to [implement an HC-SR04 sonar distance sensor](https://github.com/HankB/interrupt-driven-HC-SR04). At present I am fixing the broken documentation links and repeating the operations on both Debian and RpiOS to see if they still work. Of course (rolls eyes) as I proceed I can see that a lot of the instructions are deficient and will strive to fill the gaps.
 
 Work in progress working through first CLI commands then various protions of the [libgpiod](https://libgpiod.readthedocs.io/en/latest/index.html) (`doxygen`) documentation.
+
+Note: The first entry `CLI` links to information about the V2 library. The best V1 information I found was to execute any of the commands using the `-h` option to provide information on the V1 variant. I did not compare the differences between V1 and V2 CLI commands because they don;t particularly interest me, though some are useful.
 
 |name|Doc page|dir|status|
 |---|---|---|---|
 |CLI exploration|<https://git.kernel.org/pub/scm/libs/libgpiod/libgpiod.git/about/>|`CLI`|done|
-|High-level API|<https://libgpiod.readthedocs.io/en/latest/group__high__level.html>|`C_blinky`|done|
-|GPIO chip operations|<https://libgpiod.readthedocs.io/en/latest/group__chips.html>|`chip_operations`|done|
-|Line info|<https://libgpiod.readthedocs.io/en/latest/group__line__info.html>|`line_info`|done|
-|Line requests|<https://libgpiod.readthedocs.io/en/latest/group__line__request.html>|`line_request`|done|
-|Setting line configuration|<https://libgpiod.readthedocs.io/en/latest/group__line__config.html>|`line_config`|done|
-|Reading & setting line values|<https://libgpiod.readthedocs.io/en/latest/group__line__value.html>|`line_IO`|done|
-|Line events handling|<https://libgpiod.readthedocs.io/en/latest/group__line__event.html>|`line_events`|done|
+|High-level API|<file:///usr/share/doc/libgpiod-dev/html/group__high__level.html>|`C_blinky`|done|
+|GPIO chip operations|<file:///usr/share/doc/libgpiod-dev/html/group__chips.html>|`chip_operations`|done|
+|Line info|<file:///usr/share/doc/libgpiod-dev/html/group__line__info.html>|`line_info`|done|
+|Line requests|<file:///usr/share/doc/libgpiod-dev/html/group__line__request.html>|`line_request`|done|
+|Setting line configuration|<file:///usr/share/doc/libgpiod-dev/html/group__line__config.html>|`line_config`|done|
+|Reading & setting line values|<file:///usr/share/doc/libgpiod-dev/html/group__line__value.html>|`line_IO`|done|
+|Line events handling|<file:///usr/share/doc/libgpiod-dev/html/group__line__event.html>|`line_events`|done|
