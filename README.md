@@ -68,7 +68,7 @@ Note: The first entry `CLI` links to information about the V2 library. The best 
 |name|Doc page|dir|status|
 |---|---|---|---|
 |CLI exploration|<https://git.kernel.org/pub/scm/libs/libgpiod/libgpiod.git/about/>|`CLI`|done|
-|High-level API|<file:///usr/share/doc/libgpiod-dev/html/group__high__level.html>|`C_blinky`|done|
+|High-level API|[C_blinky](file:///usr/share/doc/libgpiod-dev/html/group__high__level.html)||done|
 |GPIO chip operations|<file:///usr/share/doc/libgpiod-dev/html/group__chips.html>|`chip_operations`|done|
 |Line info|<file:///usr/share/doc/libgpiod-dev/html/group__line__info.html>|`line_info`|done|
 |Line requests|<file:///usr/share/doc/libgpiod-dev/html/group__line__request.html>|`line_request`|done|
