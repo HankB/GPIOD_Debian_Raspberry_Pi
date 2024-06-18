@@ -1,5 +1,5 @@
 /*
-* Read the state of GPIO 7 on a Raspberry Pi
+* Read the state of GPIO 20 on a Raspberry Pi
 
 Build:
    gcc -Wall -o read read.c -l gpiod
@@ -8,7 +8,7 @@ Build:
 #include <stdio.h>
 #include <gpiod.h>
 
-const unsigned int gpio = 7;
+const unsigned int gpio = 20;
 
 int main(int argc, char **argv)
 {
