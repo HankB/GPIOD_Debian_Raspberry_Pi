@@ -4,9 +4,13 @@ Produce the embedded version of "Hello World" using C and he `gpiod` library to 
 
 Platform is Raspberry Pi 3B+ running off an SSD on Debian Bullseye (Not Raspberry Pi OS.) 
 
+## Requirements
+
+* `apt install libgpiod-dev`
+
 ## `read`
 
-Read the state of GPIO 7 using APIs listed at <file:///usr/share/doc/libgpiod-dev/html/group__high__level.html>. Build with:
+Read the state of GPIO 20 using APIs listed at <file:///usr/share/doc/libgpiod-dev/html/group__high__level.html>. Build with:
 
 ```text
 gcc -Wall -o read read.c -l gpiod
@@ -22,7 +26,7 @@ gcc -Wall -o drive drive.c -l gpiod
 
 ## `event`
 
-Monitor an event for GPIO 7 (button press.) Things I learned.
+Monitor an event for GPIO 20 (button press.) Things I learned.
 
 1. Event callback, first arg is event - 2 => rising edge, 3 => falling edge
 1. Event callback, second arg is GPIO #. Zero means a timeout.
