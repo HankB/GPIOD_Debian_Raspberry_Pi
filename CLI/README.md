@@ -49,46 +49,45 @@ hbarta@bullpi3b:~$
 
 ## `gpioget`
 
-The GPIO chosen is #7 (pin 26) since it is convenient to use as a shutdown/reboot switch. That has an alternate function `SPI_CE1_N` and is identified that way by `gpioinfo`.
+The GPIO chosen is #20 (pin 26) since it is otherwiose unused. It is named `GPIO20` and is identified that way by `gpioinfo`.
 
 ```text
-hbarta@bullpi3b:~$ gpioinfo | grep "SPI_CE1_N"
-        line   7:  "SPI_CE1_N"       unused   input  active-high 
-hbarta@bullpi3b:~$ gpioget -l /dev/gpiochip0 7
+hbarta@higgs:~$ gpioinfo | grep GPIO20
+        line  20:     "GPIO20"       unused   input  active-high 
+hbarta@higgs:~$ 
+hbarta@higgs:~$ gpioget -l /dev/gpiochip0 20    # pushbutton open
 0
-hbarta@bullpi3b:~$ gpioget -l /dev/gpiochip0 7
+hbarta@higgs:~$ gpioget -l /dev/gpiochip0 20    # pushbutton pressed
 1
-hbarta@bullpi3b:~$ 
+hbarta@higgs:~$ 
 ```
 
-Checking with a DVM, the pin is at 3.28V. The description from `gpioinfo` lists it as active high, but it could be inverted by circuitry external to the chip. Next check is to connect to ground to pull it low. That results in no change to the reading. Voltae is confirmed at 0V using the DVM.
+Checking with a DVM, the pin is at 3.28V. The description from `gpioinfo` lists it as active high, but it could be inverted by circuitry external to the chip. Next check is to connect to ground to pull it low. That results in no change to the reading. Voltage is confirmed at 0V using the DVM.
 
 ## `gpioset`
 
-Drive an LED with a 330 ohm series resistor from GPIO8 (`SPI_CE1_N`). When connected it glows dimly when the GPIO is configured as an input, likely driven by the pullup. The following command turns the LED on momentarily and the next turns on until the the user hits `<enter>`
+Drive an LED with a 330 ohm series resistor from GPIO8 (`SPI_CE1_N`). When connected it glows dimly when the GPIO is configured as an input, likely driven by the pullup. The following command turns the LED on and the next turns off.
 
 ```text
-hbarta@bullpi3b:~$ gpioset -m time -u 500 /dev/gpiochip0 8=1
-hbarta@bullpi3b:~$ gpioset -m wait /dev/gpiochip0 8=1
+hbarta@higgs:~$ gpioset /dev/gpiochip0 8=1
+hbarta@higgs:~$ gpioset /dev/gpiochip0 8=0
 ```
 
-There does not appear to be a way to have `gpioset` leave the GPIO configured on exit. It appears to put the GPIO back to input on exit.
+~~There does not appear to be a way to have `gpioset` leave the GPIO configured on exit. It appears to put the GPIO back to input on exit.~~ This was previous behavior. The commands now leave the bit set/cleared when the command exits.
 
 ## `gpimon`
 
-Conneting a momentary pushbutton between GPIO 7 and ground shows just how bouncy the switch is. For example one press close (short) and one release (open) produces the following events. And all events are not captured.
+~~Conneting a momentary pushbutton between GPIO 20 and ground shows just how bouncy the switch is. For example one press close (short) and one release (open) produces the following events. And all events are not captured.~~
+
+The default settings seem to include some debounce (or a different switch is producing differeit results.) The following results from pressing the pushbutton three times while the monitor is running. It appears that the events are timestamped with nanosecond resolution.
 
 ```text
-hbarta@bullpi3b:~$ gpiomon  /dev/gpiochip0 7
-event: FALLING EDGE offset: 7 timestamp: [   69913.990484974] # press
-event: FALLING EDGE offset: 7 timestamp: [   69915.972319494] # release
-event: FALLING EDGE offset: 7 timestamp: [   69915.972457982]
-event: FALLING EDGE offset: 7 timestamp: [   69915.972673396]
-event:  RISING EDGE offset: 7 timestamp: [   69915.972804383]
-event: FALLING EDGE offset: 7 timestamp: [   69915.972841310]
-event: FALLING EDGE offset: 7 timestamp: [   69915.972947454]
-event: FALLING EDGE offset: 7 timestamp: [   69915.972985683]
-event: FALLING EDGE offset: 7 timestamp: [   69915.973027349]
-event:  RISING EDGE offset: 7 timestamp: [   69915.973107556]
-^Chbarta@bullpi3b:~$ 
+hbarta@higgs:~$ gpiomon /dev/gpiochip0 20
+event: FALLING EDGE offset: 20 timestamp: [  263978.994698254]
+event:  RISING EDGE offset: 20 timestamp: [  263979.207460594]
+event: FALLING EDGE offset: 20 timestamp: [  263979.704718954]
+event:  RISING EDGE offset: 20 timestamp: [  263979.950956902]
+event: FALLING EDGE offset: 20 timestamp: [  263980.404080620]
+event:  RISING EDGE offset: 20 timestamp: [  263980.694575096]
+^Chbarta@higgs:~$ 
 ```
