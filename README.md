@@ -31,7 +31,7 @@ This exploration proceeds with the version of `libgpiod` presently available for
 * Github repo <https://github.com/brgl/libgpiod> (V2)
 * Current kernel repo <https://git.kernel.org/pub/scm/libs/libgpiod/libgpiod.git/>
 * `libgpiod` `doxygen` docs <https://libgpiod.readthedocs.io/en/latest/index.html> (V2)
-* `libgpiod` `doxygen` docs <file:///usr/share/doc/libgpiod-dev/html/index.html> V1, on local dosk.
+* `libgpiod` `doxygen` docs <file:///usr/share/doc/libgpiod-dev/html/index.html> V1, on local disk. Unfortunately browser security causes browsers to not want to open local files so the user will need to work to open these (e.g. copy the `file:///` link and open in another window.)
 
 ## GPIO access
 
@@ -63,12 +63,12 @@ Complete unless the need for further exploration is encountered. That need came 
 
 Work in progress working through first CLI commands then various protions of the [libgpiod](https://libgpiod.readthedocs.io/en/latest/index.html) (`doxygen`) documentation.
 
-Note: The first entry `CLI` links to information about the V2 library. The best V1 information I found was to execute any of the commands using the `-h` option to provide information on the V1 variant. I did not compare the differences between V1 and V2 CLI commands because they don;t particularly interest me, though some are useful.
+Note: The first entry `CLI` links to information about the V2 library. The best V1 information I found was to execute any of the commands using the `-h` option to provide information on the V1 variant. I did not compare the differences between V1 and V2 CLI commands because they don't particularly interest me, though some are useful.
 
 |name|Doc page|dir|status|
 |---|---|---|---|
 |CLI exploration|<https://git.kernel.org/pub/scm/libs/libgpiod/libgpiod.git/about/>|`CLI`|done|
-|High-level API|[C_blinky](file:///usr/share/doc/libgpiod-dev/html/group__high__level.html)||done|
+|High-level API|<file:///usr/share/doc/libgpiod-dev/html/group__high__level.html>|`C_blinky`|done|
 |GPIO chip operations|<file:///usr/share/doc/libgpiod-dev/html/group__chips.html>|`chip_operations`|done|
 |Line info|<file:///usr/share/doc/libgpiod-dev/html/group__line__info.html>|`line_info`|done|
 |Line requests|<file:///usr/share/doc/libgpiod-dev/html/group__line__request.html>|`line_request`|done|
