@@ -18,7 +18,31 @@ Here is a brief survey of the current situation WRT GPIO libraries (and specific
 
 Configure a Pi CM4 on a board with GPIO pins (Bicool Mini-base) and connect an LED that can be driven and a pushbutton that can be sampled to support the tests.
 
-TODO: circuit diagram/description of circuit.
+The circuit is configured to use GPIO 20 as an input and GPIO 8 as an output.
+
+```text
+   3V3
+    |
+    R = 6.66K ohm
+    |
+    |_____ GPIO 20 (pin 38)
+    |
+     / Momentary pushbutton
+    |
+    |
+ Ground
+```
+
+```text
+     _____ GPIO 8 (pin 24)
+    |
+    R = 220 ohm
+    |
+    |
+    D LED
+    |
+ Ground
+```
 
 ## Requirements
 
