@@ -81,7 +81,9 @@ hbarta@bullpi3b:~$
 
 ## Status 
 
-Once again as work in progress (as of 2024-06-15)
+Once again as work in progress (as of 2024-06-15.) At this point I have reviewed and repeated `CLI` and `C_blinky` and revised my notes along with some code modifications. I have identified APIs to try for my other project (see `C_blinky/event.c`) and will return my attention to that. 
+
+Complete for now.
 
 Complete unless the need for further exploration is encountered. That need came up when looking for a better way to [implement an HC-SR04 sonar distance sensor](https://github.com/HankB/interrupt-driven-HC-SR04). At present I am fixing the broken documentation links and repeating the operations on both Debian and RpiOS to see if they still work. Of course (rolls eyes) as I proceed I can see that a lot of the instructions are deficient and will strive to fill the gaps.
 
