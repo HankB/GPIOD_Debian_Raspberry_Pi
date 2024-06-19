@@ -24,7 +24,7 @@ Drive GPIO 8, same APIs as `read`.
 
 It shares similar behavior with `gpioset` in that returns the GPIO to an input configuration on return. By putting a 1s delay in the callback function, the result of the output can be viewed. There doesn't seem to be any way around this so this API seems not useful for a process that needs to set an output and continue execution.
 
-### Current behavior
+### Current behavior  (2024-06-19)
 
 The output is now sticky. When the program exits, the output remains set to whatever was set to. `gpioinfo` confirms that it is set to output. `gpioget` reconfigures the pin as an input. Mixing CLI and simple C APIs is a little fraught.
 
@@ -53,7 +53,7 @@ gcc -Wall -o event event.c -l gpiod
 
 Drive a GPIO pin when a pushbutton is pressed. This is done in the event callback and the call to drive the output itself has a callback to provide timing. It's callbacks all the way down! In particular I wonder if calling another API within the callback is legal. It seems to work w/out difficulty. Judging by the behavior, a noisy pushbutton input may be calling the event callback when a previous callback has not yet returned. Or maybe they are just firing in sequence.
 
-### Present version
+### Present version (2024-06-19)
 
 Drive a GPIO pin to follow an inpout on another pin. Outputs (and repoorting) is in the event callback. The timing callback to hold the output has been removed.
 
