@@ -17,7 +17,7 @@ const struct timespec timeout = {10, 0}; // run for 10s and exit
 // callback to drive the output on rising/falling edge
 int event_cb(int i, unsigned int j, const struct timespec *ts, void *unused)
 {
-    printf("i: %d, j:%d\n", i, j);
+    printf("i: %d, j:%d at %ld.%9.9ld\n", i, j, ts->tv_sec, ts->tv_nsec);
     if (j == 0)
         return 1;
     int rc = gpiod_ctxless_set_value("/dev/gpiochip0",
