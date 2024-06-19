@@ -18,7 +18,15 @@ gcc -Wall -o read read.c -l gpiod
 
 ## `drive`
 
-Drive GPIO 8, same APIs as `read`. It shares similar behavior with `gpioset` in that returns the GPIO to an input configuration on return. By putting a 1s delay in the callback function, the result of the output can be viewed. There doesn't seem to be any way around this so this API seems not useful for a process that needs to set an output and continue execution.
+Drive GPIO 8, same APIs as `read`. 
+
+### Previous behavior
+
+It shares similar behavior with `gpioset` in that returns the GPIO to an input configuration on return. By putting a 1s delay in the callback function, the result of the output can be viewed. There doesn't seem to be any way around this so this API seems not useful for a process that needs to set an output and continue execution.
+
+### Current behavior
+
+The output is now sticky. When the program exits, the output remains set to whatever was set to. `gpioinfo` confirms that it is set to output. `gpioget` reconfigures the pin as an input. Mixing CLI and simple C APIs is a little fraught.
 
 ```text
 gcc -Wall -o drive drive.c -l gpiod
