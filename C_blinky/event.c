@@ -1,5 +1,5 @@
 /*
-* Monitor an event for GPIO 7
+* Monitor an event for GPIO 20
 
 Build:
    gcc -Wall -o event event.c -l gpiod
@@ -8,12 +8,12 @@ Build:
 #include <stdio.h>
 #include <gpiod.h>
 
-const unsigned int gpio_read = 7;
+const unsigned int gpio_read = 20;
 const struct timespec timeout = {10, 0}; // 10s
 
 int event_cb(int i, unsigned int j, const struct timespec *ts, void *unused)
 {
-    printf("i: %d, j:%d\n", i, j);
+    printf("i: %d, j:%d at %ld.%9.9ld\n", i, j, ts->tv_sec, ts->tv_nsec);
     if (j == 0)
         return 1;
     return 0;
