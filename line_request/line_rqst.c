@@ -42,7 +42,7 @@ int main(int argc, char **argv)
 
     // next find a couple lines
     struct gpiod_line_bulk bulk;
-    const char *names[] = {"SPI_CE1_N", "SPI_CE0_N", "STATUS_LED_G", 0};
+    const char *names[] = {"SPI_CE1_N", "SPI_CE0_N", "STATUS_LED_G_CLK", 0}; // RpiOS:STATUS_LED_G, Debian:STATUS_LED_G_CLK
     int rc = gpiod_chip_find_lines(chip,
                                    names,
                                    &bulk);
