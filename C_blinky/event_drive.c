@@ -12,7 +12,7 @@ Build:
 
 const unsigned int gpio_read = 20;
 const unsigned int gpio_drive = 8;
-const struct timespec timeout = {10, 0}; // run for 10s and exit
+const struct timespec timeout = {999, 0}; // run for forever(?)
 
 // callback to drive the output on rising/falling edge
 int event_cb(int i, unsigned int j, const struct timespec *ts, void *unused)
@@ -21,7 +21,7 @@ int event_cb(int i, unsigned int j, const struct timespec *ts, void *unused)
     if (j == 0)
         return 1;
     int rc = gpiod_ctxless_set_value("/dev/gpiochip0",
-                                     gpio_drive, i-2, false,
+                                     gpio_drive, (i==2)?1:0, false,
                                      "consumer", 0 , 0);
     if (rc < 0)
     {
