@@ -75,7 +75,7 @@ The following section has been updated.
 |name|Doc page|dir|status|
 |---|---|---|---|
 |CLI exploration|<https://libgpiod.readthedocs.io/en/latest/gpio_tools.html>|`CLI`|done|
-|libgpiod core API|https://libgpiod.readthedocs.io/en/latest/core_api.html|`Core`|chip info|
+|libgpiod core API|https://libgpiod.readthedocs.io/en/latest/core_api.html|`Core`|chip, line info (complete)|
 
 The following section are from the `GPIOD_V1.6` branch and may not map directly to the V2.2 release.
 

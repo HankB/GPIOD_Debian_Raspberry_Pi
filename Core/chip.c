@@ -11,6 +11,15 @@ Build:
 
 static const char *chip_name = "/dev/gpiochip0";
 
+static void print_line_info(struct gpiod_line_info *p_info)
+{
+    printf("line info for:%s\n"
+        "       direction:%d\n"
+        "\n",
+        gpiod_line_info_get_name(p_info),
+        gpiod_line_info_get_direction(p_info) );
+}
+
 int main(int argc, char **argv)
 {
     printf("API version:%s:\n", gpiod_api_version());
@@ -22,7 +31,7 @@ int main(int argc, char **argv)
         return(errno);
     }
     else {
-        printf("opened chip '%s'\n", chip_name);
+        printf("opened chip '%s'\n\n", chip_name);
     }
 
     // fetch chip info
@@ -43,10 +52,53 @@ int main(int argc, char **argv)
             gpiod_chip_info_get_label(p_info),
             gpiod_chip_info_get_num_lines(p_info)
         );
-        gpiod_chip_info_free(p_info);
     }
 
-    // close the chip
+    // fetch chip info for GPIO8
+    struct gpiod_line_info * p_line_info = gpiod_chip_get_line_info(p_chip, 8);
+    if(NULL == p_line_info) {
+        perror("Can't get line info:");
+        int save_errno = errno;
+        gpiod_chip_info_free(p_info);
+        gpiod_chip_close(p_chip);
+        return(save_errno);
+    }
+    else {
+        print_line_info(p_line_info);
+        gpiod_line_info_free(p_line_info);
+    }
+
+        // fetch chip info for GPIO20
+    p_line_info = gpiod_chip_get_line_info(p_chip, 20);
+    if(NULL == p_line_info) {
+        perror("Can't get line info:");
+        int save_errno = errno;
+        gpiod_chip_info_free(p_info);
+        gpiod_chip_close(p_chip);
+        return(save_errno);
+    }
+    else {
+        print_line_info(p_line_info);
+        gpiod_line_info_free(p_line_info);
+    }
+
+        // fetch chip info for GPIO10
+    p_line_info = gpiod_chip_get_line_info(p_chip, 10);
+    if(NULL == p_line_info) {
+        perror("Can't get line info:");
+        int save_errno = errno;
+        gpiod_chip_info_free(p_info);
+        gpiod_chip_close(p_chip);
+        return(save_errno);
+    }
+    else {
+        print_line_info(p_line_info);
+        gpiod_line_info_free(p_line_info);
+    }
+
+
+    // release resources
+    gpiod_chip_info_free(p_info);
     gpiod_chip_close(p_chip);
 
     return 0;
