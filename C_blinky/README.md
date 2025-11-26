@@ -6,7 +6,9 @@ Platform is Raspberry Pi 3B+ running off an SSD on Debian Bullseye (Not Raspberr
 
 ## Requirements
 
-* `apt install libgpiod-dev`
+```text
+sudo apt install libgpiod-dev
+```
 
 ## `read`
 

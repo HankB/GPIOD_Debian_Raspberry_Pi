@@ -70,9 +70,17 @@ This is not an issue with RPiOS and testiung with Debian has not yet been done. 
 * 2025-11-26 Revise this README.
 * 2025-11-26 Update CLI operations.
 
+The following section has been updated.
+
 |name|Doc page|dir|status|
 |---|---|---|---|
-|CLI exploration|<https://git.kernel.org/pub/scm/libs/libgpiod/libgpiod.git/about/>|`CLI`|done|
+|CLI exploration|<https://libgpiod.readthedocs.io/en/latest/gpio_tools.html>|`CLI`|done|
+|libgpiod core API|https://libgpiod.readthedocs.io/en/latest/core_api.html|`Core`|chip info|
+
+The following section are from the `GPIOD_V1.6` branch and may not map directly to the V2.2 release.
+
+|name|Doc page|dir|status|
+|---|---|---|---|
 |High-level API|<file:///usr/share/doc/libgpiod-dev/html/group__high__level.html>|`C_blinky`|done|
 |GPIO chip operations|<file:///usr/share/doc/libgpiod-dev/html/group__chips.html>|`chip_operations`|done|
 |Line info|<file:///usr/share/doc/libgpiod-dev/html/group__line__info.html>|`line_info`|done|
