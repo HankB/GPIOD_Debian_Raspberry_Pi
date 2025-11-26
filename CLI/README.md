@@ -4,90 +4,159 @@ The `gpiod` package includes the following commands as listed by `dpkg -L gpiod`
 
 ```text
 /usr/bin/gpiodetect
-/usr/bin/gpiofind
 /usr/bin/gpioget
 /usr/bin/gpioinfo
 /usr/bin/gpiomon
+/usr/bin/gpionotify
 /usr/bin/gpioset
 ```
 
-The `man` pages for these commands are pretty terse. Some information and examples are found at <https://lloydrochester.com/post/hardware/libgpiod-intro-rpi/>
+The `man` pages for these commands have been expanded considerably and likewise the `--help` output. The V1.6 version of this document also referenced <https://lloydrochester.com/post/hardware/libgpiod-intro-rpi/> and I have not verified if that is still relevant.
 
 ## `gpiodetect`
 
 ```text
-hbarta@bullpi3b:~$ gpiodetect
+hbarta@drogo:~ $ gpiodetect
 gpiochip0 [pinctrl-bcm2835] (54 lines)
 gpiochip1 [raspberrypi-exp-gpio] (8 lines)
-hbarta@bullpi3b:~$ 
+hbarta@drogo:~ $ 
 ```
 
-## `gpiofind` and `gpioinfo`
-
-These report information about the system.
+## `gpioinfo`
 
 ```text
-hbarta@bullpi3b:~$ gpioinfo 
+hbarta@drogo:~ $ gpioinfo
 gpiochip0 - 54 lines:
-        line   0:     "ID_SDA"       unused   input  active-high 
-        line   1:     "ID_SCL"       unused   input  active-high 
-        line   2:       "SDA1"       unused   input  active-high 
-        line   3:       "SCL1"       unused   input  active-high 
-        line   4:  "GPIO_GCLK"       unused   input  active-high 
-        line   5:      "GPIO5"       unused   input  active-high 
-...
+        line   0:       "ID_SDA"                input
+        line   1:       "ID_SCL"                input
+        line   2:       "GPIO2"                 input
+        line   3:       "GPIO3"                 input
+        line   4:       "GPIO4"                 input
+        line   5:       "GPIO5"                 input
+        line   6:       "GPIO6"                 input
+        line   7:       "GPIO7"                 input active-low consumer="shutdown"
+        line   8:       "GPIO8"                 input
+        line   9:       "GPIO9"                 input
+        line  10:       "GPIO10"                input
+        line  11:       "GPIO11"                input
+        line  12:       "GPIO12"                input
+        line  13:       "GPIO13"                input
+        line  14:       "GPIO14"                input
+        line  15:       "GPIO15"                input
+        line  16:       "GPIO16"                input
+        line  17:       "GPIO17"                input
+        line  18:       "GPIO18"                input
+        line  19:       "GPIO19"                input
+        line  20:       "GPIO20"                input
+        line  21:       "GPIO21"                input
+        line  22:       "GPIO22"                input
+        line  23:       "GPIO23"                input
+        line  24:       "GPIO24"                input
+        line  25:       "GPIO25"                input
+        line  26:       "GPIO26"                input
+        line  27:       "GPIO27"                input
+        line  28:       "HDMI_HPD_N"            input active-low consumer="hpd"
+        line  29:       "STATUS_LED_G"          output consumer="ACT"
+        line  30:       "CTS0"                  input
+        line  31:       "RTS0"                  input
+        line  32:       "TXD0"                  input
+        line  33:       "RXD0"                  input
+        line  34:       "SD1_CLK"               input
+        line  35:       "SD1_CMD"               input
+        line  36:       "SD1_DATA0"             input
+        line  37:       "SD1_DATA1"             input
+        line  38:       "SD1_DATA2"             input
+        line  39:       "SD1_DATA3"             input
+        line  40:       "PWM0_OUT"              input
+        line  41:       "PWM1_OUT"              input
+        line  42:       "ETH_CLK"               input
+        line  43:       "WIFI_CLK"              input
+        line  44:       "SDA0"                  input
+        line  45:       "SCL0"                  input
+        line  46:       "SMPS_SCL"              input
+        line  47:       "SMPS_SDA"              output
+        line  48:       "SD_CLK_R"              input
+        line  49:       "SD_CMD_R"              input
+        line  50:       "SD_DATA0_R"            input
+        line  51:       "SD_DATA1_R"            input
+        line  52:       "SD_DATA2_R"            input
+        line  53:       "SD_DATA3_R"            input
 gpiochip1 - 8 lines:
-        line   0:      "BT_ON"   "shutdown"  output  active-high [used]
-        line   1:      "WL_ON"      "reset"  output   active-low [used]
-        line   2:  "PWR_LED_R"        "PWR"  output   active-low [used]
-        line   3:    "LAN_RUN"       unused  output  active-high 
-...
-hbarta@bullpi3b:~$ gpiofind GPIO5
-gpiochip0 5
-hbarta@bullpi3b:~$ 
+        line   0:       "BT_ON"                 output consumer="shutdown"
+        line   1:       "WL_ON"                 output
+        line   2:       "PWR_LED_R"             output active-low consumer="PWR"
+        line   3:       "LAN_RUN"               output
+        line   4:       "NC"                    input
+        line   5:       "CAM_GPIO0"             output consumer="cam1_regulator"
+        line   6:       "CAM_GPIO1"             output
+        line   7:       "NC"                    input
+hbarta@drogo:~ $ 
 ```
 
 ## `gpioget`
 
-The GPIO chosen is #20 (pin 26) since it is otherwiose unused. It is named `GPIO20` and is identified that way by `gpioinfo`.
+The GPIO chosen is #20 (pin 38) for no goiod reason. Its name is`GPIO20` and it is identified as such by `gpioinfo`.
 
 ```text
-hbarta@higgs:~$ gpioinfo | grep GPIO20
-        line  20:     "GPIO20"       unused   input  active-high 
-hbarta@higgs:~$ 
-hbarta@higgs:~$ gpioget -l /dev/gpiochip0 20    # pushbutton open
-0
-hbarta@higgs:~$ gpioget -l /dev/gpiochip0 20    # pushbutton pressed
-1
-hbarta@higgs:~$ 
+hbarta@drogo:~ $ gpioinfo | grep GPIO20
+        line  20:       "GPIO20"                input
+hbarta@drogo:~ $ gpioget GPIO20 # SW open, 2.6V on input
+"GPIO20"=active
+hbarta@drogo:~ $ gpioget GPIO20 # SW closed, 0V on input
+"GPIO20"=inactive
+hbarta@drogo:~ $ 
 ```
-
-Checking with a DVM, the pin is at 3.28V. The description from `gpioinfo` lists it as active high, but it could be inverted by circuitry external to the chip. Next check is to connect to ground to pull it low. That results in no change to the reading. Voltage is confirmed at 0V using the DVM.
 
 ## `gpioset`
 
-Drive an LED with a 330 ohm series resistor from GPIO8 (`SPI_CE1_N`). When connected it glows dimly when the GPIO is configured as an input, likely driven by the pullup. The following command turns the LED on and the next turns off.
+Drive an LED with a 470 ohm series resistor from `GPIO8`. The following command turns the LED on and the next turns off.
 
 ```text
-hbarta@higgs:~$ gpioset /dev/gpiochip0 8=1
-hbarta@higgs:~$ gpioset /dev/gpiochip0 8=0
+hbarta@drogo:~ $ gpioset GPIO8=1 # turns LED on and exits using <ctrl>C
+^C
+hbarta@drogo:~ $ gpioset GPIO8=0 # turns LED off and exits using <ctrl>C
+^C
+hbarta@drogo:~ $ 
 ```
 
-~~There does not appear to be a way to have `gpioset` leave the GPIO configured on exit. It appears to put the GPIO back to input on exit.~~ This was previous behavior. The commands now leave the bit set/cleared when the command exits.
+By default `gpioset` does not exit but can be set to exit using the `-t` option. The following sequence turns the LED on and exits, leaving the LED on. The second command turns the LED off and similarly exits.
+
+```text
+hbarta@drogo:~ $ gpioset -t 1s -t 1 -t 0 GPIO8=1
+hbarta@drogo:~ $ gpioset -t 1s -t 1 -t 0 GPIO8=0
+hbarta@drogo:~ $ 
+```
 
 ## `gpimon`
 
-~~Conneting a momentary pushbutton between GPIO 20 and ground shows just how bouncy the switch is. For example one press close (short) and one release (open) produces the following events. And all events are not captured.~~
-
-The default settings seem to include some debounce (or a different switch is producing differeit results.) The following results from pressing the pushbutton three times while the monitor is running. It appears that the events are timestamped with nanosecond resolution.
+The following sequence captures the output when the (momentary) switch is pressed three times, demonstrating switch bounce on the last release.
 
 ```text
-hbarta@higgs:~$ gpiomon /dev/gpiochip0 20
-event: FALLING EDGE offset: 20 timestamp: [  263978.994698254]
-event:  RISING EDGE offset: 20 timestamp: [  263979.207460594]
-event: FALLING EDGE offset: 20 timestamp: [  263979.704718954]
-event:  RISING EDGE offset: 20 timestamp: [  263979.950956902]
-event: FALLING EDGE offset: 20 timestamp: [  263980.404080620]
-event:  RISING EDGE offset: 20 timestamp: [  263980.694575096]
-^Chbarta@higgs:~$ 
+hbarta@drogo:~ $ gpiomon GPIO20
+42016.628976252 falling "GPIO20"
+42016.950150625 rising  "GPIO20"
+42017.476182171 falling "GPIO20"
+42017.840469645 rising  "GPIO20"
+42018.266603689 falling "GPIO20"
+42018.605324244 rising  "GPIO20"
+42018.605495642 falling "GPIO20"
+42018.605883177 falling "GPIO20"
+42018.606015827 falling "GPIO20"
+42018.606093532 falling "GPIO20"
+42018.606243474 falling "GPIO20"
+42018.606380082 rising  "GPIO20"
+^C
+hbarta@drogo:~ $
+```
+
+## `gpionotify`
+
+Report changes in line info. For example it produces the following when the command `gpioset GPIO8=1` is executed in a different terminal window:
+
+```text
+hbarta@drogo:~ $ gpionotify GPIO8
+42487.298348511 requested       "GPIO8"
+42492.355611284 released        "GPIO8"
+^C
+hbarta@drogo:~ $
 ```
