@@ -1,5 +1,11 @@
 # GPIOD_Debian_Raspberry_Pi
 
+## 2025-11-27 Plan update
+
+I'm struggling to map the sub-projects (beyone CLI) to the V2.2 APIs. For thgis reason I plan to set aside the old sub-projects and create new sub-projects based on heradings under the Copre API (https://libgpiod.readthedocs.io/en/latest/core_api.html) I'm also struggling to work out how the new APIs are to be assembled for what I need. (What I need is the capability to monitor events from a GPIO pin to accurately measure time using an HC-SR04 ulktrasonic sensor. I also need to drive another GPIO to trigger sensing.) As an aside, I'll prepend the directory names with numbers so they sort in order of implementation. (e.g. `CLI` becomes `00-CLI`.)
+
+## Project
+
 Explore GPIOD on Raspberry Pi running Debian Linux.
 
 This is the second generation of the project which supports GPIOD V2.x which comes with Debian/RpiOS Trixie and is not API compatible. If you need to explore GPIOD on an older host OS, checkout the branch `GPIOD_V1.6`
@@ -75,11 +81,16 @@ The following section has been updated.
 |name|Doc page|dir|status|
 |---|---|---|---|
 |CLI exploration|<https://libgpiod.readthedocs.io/en/latest/gpio_tools.html>|`CLI`|done|
+
+False V2.2 start
+
+|name|Doc page|dir|status|
+|---|---|---|---|
 |libgpiod core API|https://libgpiod.readthedocs.io/en/latest/core_api.html|`Core`|chip, line info (complete)|
 |Setting line configuration|<https://libgpiod.readthedocs.io/en/latest/core_line_config.html>|`line_config`|WIP|
 |Reading & setting line values|<file:///usr/share/doc/libgpiod-dev/html/group__line__value.html>|`line_IO`|not yet|
 
-The following section are from the `GPIOD_V1.6` branch and may not map directly to the V2.2 release (and/or may not be explored at this time.)
+The following sections are from the `GPIOD_V1.6` branch.
 
 |name|Doc page|dir|status|
 |---|---|---|---|
