@@ -80,7 +80,8 @@ The following section has been updated.
 
 |name|Doc page|dir|status|
 |---|---|---|---|
-|CLI exploration|<https://libgpiod.readthedocs.io/en/latest/gpio_tools.html>|`CLI`|done|
+|CLI exploration|<https://libgpiod.readthedocs.io/en/latest/gpio_tools.html>|`CLI`|complete|
+|GPIO chip|<https://libgpiod.readthedocs.io/en/latest/core_chips.html#>|01-GPIO-Chip|complete|
 
 False V2.2 start
 
