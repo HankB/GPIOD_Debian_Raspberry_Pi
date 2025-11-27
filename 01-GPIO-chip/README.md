@@ -1,4 +1,4 @@
-# GPIO Chip
+# GPIO chip
 
 * <https://libgpiod.readthedocs.io/en/latest/core_chips.html>
 
