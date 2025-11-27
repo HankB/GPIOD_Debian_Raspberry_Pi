@@ -76,8 +76,10 @@ The following section has been updated.
 |---|---|---|---|
 |CLI exploration|<https://libgpiod.readthedocs.io/en/latest/gpio_tools.html>|`CLI`|done|
 |libgpiod core API|https://libgpiod.readthedocs.io/en/latest/core_api.html|`Core`|chip, line info (complete)|
+|Setting line configuration|<https://libgpiod.readthedocs.io/en/latest/core_line_config.html>|`line_config`|WIP|
+|Reading & setting line values|<file:///usr/share/doc/libgpiod-dev/html/group__line__value.html>|`line_IO`|not yet|
 
-The following section are from the `GPIOD_V1.6` branch and may not map directly to the V2.2 release.
+The following section are from the `GPIOD_V1.6` branch and may not map directly to the V2.2 release (and/or may not be explored at this time.)
 
 |name|Doc page|dir|status|
 |---|---|---|---|
@@ -85,8 +87,6 @@ The following section are from the `GPIOD_V1.6` branch and may not map directly 
 |GPIO chip operations|<file:///usr/share/doc/libgpiod-dev/html/group__chips.html>|`chip_operations`|done|
 |Line info|<file:///usr/share/doc/libgpiod-dev/html/group__line__info.html>|`line_info`|done|
 |Line requests|<file:///usr/share/doc/libgpiod-dev/html/group__line__request.html>|`line_request`|done|
-|Setting line configuration|<file:///usr/share/doc/libgpiod-dev/html/group__line__config.html>|`line_config`|done|
-|Reading & setting line values|<file:///usr/share/doc/libgpiod-dev/html/group__line__value.html>|`line_IO`|done|
 |Line events handling|<file:///usr/share/doc/libgpiod-dev/html/group__line__event.html>|`line_events`|done|
 
 [^1]: Most of my use of GPIO code is on Pi Zeroes so that is the environment chosen for this test. Using Debian on a Pi Zero with the 1-wire protocol has been a challenge.

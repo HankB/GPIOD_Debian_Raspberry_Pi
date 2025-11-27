@@ -8,7 +8,7 @@ Exerecised one API from <https://libgpiod.readthedocs.io/en/latest/group__line__
 gcc -Wall -o line_cfg line_cfg.c -l gpiod
 ```
 
-For testing this an LED was connected to the output of GPIO 8 with a 330 ohm series resistor. With GPIO 8 in default configuration (input with pullup) The LED glows dimly. When set to output it is either bright or off, depending on the output state. Delays are inserted in the code to help make this obvious.
+For testing this an LED was connected to the output of GPIO 8 with a 470 ohm series resistor. 
 
 ```text
 hbarta@bullpi3b:~/Programming/GPIOD_Debian_Raspberry_Pi/line_cfg$ ./line_cfg 

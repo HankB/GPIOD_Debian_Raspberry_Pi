@@ -11,22 +11,23 @@ Build
 
 void report_line_attributes(struct gpiod_line *line, const char *name)
 {
-    bool is_free = gpiod_line_is_free(line);
-    printf("Is free        %s is %s\n", name, is_free ? "yes" : "no");
-    bool is_requested = gpiod_line_is_requested(line);
-    printf("Is requested   %s is %s\n", name, is_requested ? "yes" : "no");
+    int offset = gpiod_chip_get_line_offset_from_name(line, name);
+    if(-1 == offset) {
+        perror("gpiod_chip_get_line_offset_from_name():")
+        return;
+    }
+    gpiod_line_info *info = gpiod_chip_get_line_info(p_chip, offset);
+    bool is_free = gpiod_line_info_is_used(line);
+    printf("Is free        %s is %s\n", name, used ? "yes" : "no");
 
-    int bias = gpiod_line_bias(line);
+    int bias = gpiod_line_info_get_bias(line);
     printf("Bias of        %s is %d\n", name, bias);
 
-    const char *consumer = gpiod_line_consumer(line);
+    const char *consumer = gpiod_line_info_get_consumer(line);
     printf("Consumer of    %s is %s\n", name, consumer);
 
-    int direction = gpiod_line_direction(line);
+    int direction = gpiod_line_info_get_direction(line);
     printf("Direction of   %s is %d\n", name, direction);
-
-    bool used = gpiod_line_is_used(line);
-    printf("Is             %s used %s\n", name, used ? "yes" : "no");
 }
 
 int main(int argc, char **argv)
