@@ -9,24 +9,24 @@ Build
 #include <gpiod.h>
 #include <unistd.h>
 
-void report_line_attributes(struct gpiod_line *line, const char *name)
+void report_line_attributes(struct gpiod_chip *chip, const char *name)
 {
-    int offset = gpiod_chip_get_line_offset_from_name(line, name);
+    int offset = gpiod_chip_get_line_offset_from_name(chip, name);
     if(-1 == offset) {
-        perror("gpiod_chip_get_line_offset_from_name():")
+        perror("gpiod_chip_get_line_offset_from_name():");
         return;
     }
-    gpiod_line_info *info = gpiod_chip_get_line_info(p_chip, offset);
-    bool is_free = gpiod_line_info_is_used(line);
+    struct gpiod_line_info *info = gpiod_chip_get_line_info(chip, offset);
+    bool used = gpiod_line_info_is_used(info);
     printf("Is free        %s is %s\n", name, used ? "yes" : "no");
 
-    int bias = gpiod_line_info_get_bias(line);
+    int bias = gpiod_line_info_get_bias(info);
     printf("Bias of        %s is %d\n", name, bias);
 
-    const char *consumer = gpiod_line_info_get_consumer(line);
+    const char *consumer = gpiod_line_info_get_consumer(info);
     printf("Consumer of    %s is %s\n", name, consumer);
 
-    int direction = gpiod_line_info_get_direction(line);
+    int direction = gpiod_line_info_get_direction(info);
     printf("Direction of   %s is %d\n", name, direction);
 }
 
@@ -42,7 +42,7 @@ int main(int argc, char **argv)
 
     // acquire & configure GPIO 8
 
-    struct gpiod_line *gpio_8;
+    struct gpiod_line *f;
 
     gpio_8 = gpiod_chip_find_line(chip, "SPI_CE0_N");
     report_line_attributes(gpio_8, "SPI_CE0_N");
