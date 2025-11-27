@@ -12,6 +12,7 @@ line_rqst
 line_cfg
 read_write
 line_events
+chip-info
 
 # VS Code cruft
 .vscode/
