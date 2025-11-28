@@ -84,6 +84,7 @@ The following section has been updated.
 |GPIO chip|<https://libgpiod.readthedocs.io/en/latest/core_chips.html#>|`01-GPIO-chip`|complete|
 |GPIO chip info|<https://libgpiod.readthedocs.io/en/latest/core_chip_info.html#>|`02-GPIO-chip-info`|complete|
 |GPIO line information|https://libgpiod.readthedocs.io/en/latest/core_line_info.html#>|`03-GPIO-line-information`|complete|
+|GPIO line watch|<https://libgpiod.readthedocs.io/en/latest/core_line_watch.html>|04-GPIO-line-watch|WIP, will return|
 
 False V2.2 start
 

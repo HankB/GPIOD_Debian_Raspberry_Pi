@@ -14,6 +14,7 @@ read_write
 line_events
 chip-info
 line-information
+line-watch
 
 # VS Code cruft
 .vscode/
