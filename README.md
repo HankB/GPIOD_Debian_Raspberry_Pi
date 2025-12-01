@@ -80,11 +80,12 @@ The following section has been updated.
 
 |name|Doc page|dir|status|
 |---|---|---|---|
-|CLI exploration|<https://libgpiod.readthedocs.io/en/latest/gpio_tools.html>|`CLI`|complete|
+|CLI exploration|<https://libgpiod.readthedocs.io/en/latest/gpio_tools.html>|`00-CLI`|complete|
 |GPIO chip|<https://libgpiod.readthedocs.io/en/latest/core_chips.html#>|`01-GPIO-chip`|complete|
 |GPIO chip info|<https://libgpiod.readthedocs.io/en/latest/core_chip_info.html#>|`02-GPIO-chip-info`|complete|
 |GPIO line information|https://libgpiod.readthedocs.io/en/latest/core_line_info.html#>|`03-GPIO-line-information`|complete|
-|GPIO line watch|<https://libgpiod.readthedocs.io/en/latest/core_line_watch.html>|04-GPIO-line-watch|WIP, will return|
+|GPIO line watch|<https://libgpiod.readthedocs.io/en/latest/core_line_watch.html>|`04-GPIO-line-watch`|WIP, will return|
+|GPIO line settings|https://libgpiod.readthedocs.io/en/latest/core_line_settings.html|`05-GPIO-line-settings`|
 
 False V2.2 start
 
