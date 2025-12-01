@@ -15,6 +15,7 @@ line_events
 chip-info
 line-information
 line-watch
+line-settings
 
 # VS Code cruft
 .vscode/
