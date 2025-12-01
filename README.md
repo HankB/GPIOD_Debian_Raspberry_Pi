@@ -86,6 +86,7 @@ The following section has been updated.
 |GPIO line information|https://libgpiod.readthedocs.io/en/latest/core_line_info.html#>|`03-GPIO-line-information`|complete|
 |GPIO line watch|<https://libgpiod.readthedocs.io/en/latest/core_line_watch.html>|`04-GPIO-line-watch`|WIP, will return|
 |GPIO line settings|https://libgpiod.readthedocs.io/en/latest/core_line_settings.html|`05-GPIO-line-settings`|
+|GPIO line configuration|https://libgpiod.readthedocs.io/en/latest/core_line_config.html#|`06-GPIO-line-configuration`|
 
 False V2.2 start
 
