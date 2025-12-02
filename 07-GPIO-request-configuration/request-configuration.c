@@ -24,11 +24,11 @@ int main(int argc, char **argv)
     printf("Request configuration object acquired\n");
 
     gpiod_request_config_set_consumer(request, "request_config");
-    printf("Request configurationconsumer set to '%s'\n", gpiod_request_config_get_consumer(request));
+    printf("Request consumer set to '%s'\n", gpiod_request_config_get_consumer(request));
 
     printf("Default event buffer size %d\n", gpiod_request_config_get_event_buffer_size(request));
 
-    // explore allowable size (untril we roll over.)
+    // explore allowable size (until we roll over.)
     size_t requested_size = 1;
     size_t realized_size;
     do
