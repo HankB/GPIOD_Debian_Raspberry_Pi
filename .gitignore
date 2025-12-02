@@ -18,6 +18,8 @@ line-watch
 line-settings
 line-configuration
 request-configuration
+line-request
+
 
 # VS Code cruft
 .vscode/
