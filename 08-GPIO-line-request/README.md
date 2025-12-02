@@ -13,7 +13,9 @@ This API set starts to pull together some of the other APIs and in particular fr
        struct gpiod_line_config *line_cfg)              // GPIO line configuration
  ```
 
-Other APIs are used to configure the structs passed to `gpiod_chip_request_lines()`.
+Other APIs are used to configure the structs passed to `gpiod_chip_request_lines()`. This demonstration (at present) works through the steps (seemingly) required to drive a GPIO which lights the attached LED for 1s.
+
+The next step is to configure GPIO20 to read the input.
 
 
 ## Requirements
@@ -29,24 +31,35 @@ gcc -Wall -o line-request line-request.c -l gpiod
 ```
 
 ```text
-hbarta@drogo:~/Programming/GPIOD_Debian_Raspberry_Pi/01-GPIO-Chip $ ./chip
+hbarta@drogo:~/Programming/GPIOD_Debian_Raspberry_Pi/08-GPIO-line-request $ ./line-request 
 API version:2.2.1:
 opened chip '/dev/gpiochip0'
 
-  Info for chip:/dev/gpiochip0
-           name:gpiochip0
-          label:pinctrl-bcm2835
-number of lines:54
-line info for:GPIO8
-       direction:3
+Request configuration object acquired
+Request consumer set to 'line request'
+Default event buffer size 0
+Line configuration object acquired
+Settings object acquired
+Settings object set to output
+line set to output and set active
+gpiod_line_settings added to gpiod_line_config
+Event buffer size requested 10, realized 10
+Line request object acquired
 
-line info for:GPIO20
-       direction:2
+            chip name:gpiochip0
+      requested lines:1
+            offset at:8 is 0
 
-line info for:GPIO10
-       direction:2
+gpiod_line_request_set_value():0
 
-hbarta@drogo:~/Programming/GPIOD_Debian_Raspberry_Pi/01-GPIO-Chip $ 
+            chip name:gpiochip0
+      requested lines:1
+            offset at:8 is 1
+
+gpiod_line_request_set_value():0
+
+            chip name:gpiochip0
+      requested lines:1
+            offset at:8 is 0
+hbarta@drogo:~/Programming/GPIOD_Debian_Raspberry_Pi/08-GPIO-line-request $ 
 ```
-
-NB `print_line_info()` includes APIs not part of 'GPIO Chip' page.

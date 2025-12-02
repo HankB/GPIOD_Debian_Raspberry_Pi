@@ -13,11 +13,28 @@ Build:
 
 static const char *chip_name = "/dev/gpiochip0";
 
+static void print_line_request_info(struct gpiod_line_request *request)
+{
+    printf("\n");
+    printf("            chip name:%s\n", gpiod_line_request_get_chip_name(request));
+    printf("      requested lines:%u\n", gpiod_line_request_get_num_requested_lines(request));
+    static const size_t max_offsets = 5;
+    unsigned int offsets[max_offsets];
+    size_t offsets_found = gpiod_line_request_get_requested_offsets(request, offsets, max_offsets);
+    for (int i = 0; i < offsets_found; i++)
+    {
+        enum gpiod_line_value value = gpiod_line_request_get_value(request, offsets[i]);
+        printf("            offset at:%u is %d\n", offsets[i], value);
+    }
+}
+
 int main(int argc, char **argv)
 {
     printf("API version:%s:\n", gpiod_api_version());
 
+    /////////////////////////////////////////////
     // open the chip
+    /////////////////////////////////////////////
     struct gpiod_chip *chip = gpiod_chip_open(chip_name);
     if (NULL == chip)
     {
@@ -28,7 +45,6 @@ int main(int argc, char **argv)
     {
         printf("opened chip '%s'\n\n", chip_name);
     }
-
 
     /////////////////////////////////////////////
     // request configuration
@@ -77,7 +93,7 @@ int main(int argc, char **argv)
     printf("Settings object set to output\n");
     enum gpiod_line_value values[] = {GPIOD_LINE_VALUE_INACTIVE};
     int rc = gpiod_line_config_set_output_values(line_config, values, 1);
-    printf( "line set to output and set active\n");
+    printf("line set to output and set active\n");
 
     unsigned int offsets[1] = {8};
     rc = gpiod_line_config_add_line_settings(line_config, offsets, 1, settings);
@@ -106,7 +122,7 @@ int main(int argc, char **argv)
     /////////////////////////////////////////////
     struct gpiod_line_request *line_request = gpiod_chip_request_lines(
         chip, config_request, line_config);
-    if(NULL == line_request)
+    if (NULL == line_request)
     {
         int saved_errno = errno;
         perror("gpiod_chip_request_lines()");
@@ -116,8 +132,14 @@ int main(int argc, char **argv)
         return saved_errno;
     }
     printf("Line request object acquired\n");
-
-    sleep(1);
+    print_line_request_info(line_request);
+    rc = gpiod_line_request_set_value(line_request, offsets[0], GPIOD_LINE_VALUE_ACTIVE);
+    printf("\ngpiod_line_request_set_value():%d\n", rc);
+    print_line_request_info(line_request);
+    sleep(1); // so we can see if GPIO8 was driven hign
+    rc = gpiod_line_request_set_value(line_request, offsets[0], GPIOD_LINE_VALUE_INACTIVE);
+    printf("\ngpiod_line_request_set_value():%d\n", rc);
+    print_line_request_info(line_request);
 
     gpiod_line_request_release(line_request);
     gpiod_line_settings_free(settings);
