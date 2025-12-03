@@ -12,7 +12,7 @@ Build:
 #include <errno.h>
 
 static const char *chip_name = "/dev/gpiochip0";
-#define count_of(x) (sizeof(x)/sizeof(x[0]))
+#define count_of(x) (sizeof(x) / sizeof(x[0]))
 
 static void print_line_request_info(struct gpiod_line_request *request)
 {
@@ -46,13 +46,13 @@ int main(int argc, char **argv)
 
     /////////////////////////////////////////////
     // Start configuration of input line
-    // 
+    //
     // request configuration/input
     /////////////////////////////////////////////
     struct gpiod_request_config *config_request_in = gpiod_request_config_new();
     if (NULL == config_request_in)
     {
-        int saved_error=errno;
+        int saved_error = errno;
         perror("gpiod_request_config_new()");
         gpiod_chip_close(chip);
         exit(saved_error);
@@ -66,7 +66,7 @@ int main(int argc, char **argv)
     struct gpiod_line_config *line_config_in = gpiod_line_config_new();
     if (NULL == line_config_in)
     {
-        int saved_error=errno;
+        int saved_error = errno;
         perror("gpiod_line_config_new()");
         gpiod_request_config_free(config_request_in);
         gpiod_chip_close(chip);
@@ -78,7 +78,7 @@ int main(int argc, char **argv)
     struct gpiod_line_settings *settings_in = gpiod_line_settings_new();
     if (NULL == settings_in)
     {
-        int saved_error=errno;
+        int saved_error = errno;
         perror("gpiod_line_settings_new()");
         gpiod_request_config_free(config_request_in);
         gpiod_chip_close(chip);
@@ -98,9 +98,8 @@ int main(int argc, char **argv)
     enum gpiod_line_value values_in[] = {GPIOD_LINE_VALUE_INACTIVE};
     int rc = gpiod_line_config_set_output_values(line_config_in, values_in, count_of(values_in));
 
-    
     unsigned int offsets_in[] = {20}; // NEED TO MATCH COUNT OF ELEMENTS IN values_in[]
-    rc = gpiod_line_config_add_line_settings(line_config_in, offsets_in, count_of(offsets_in) , settings_in);
+    rc = gpiod_line_config_add_line_settings(line_config_in, offsets_in, count_of(offsets_in), settings_in);
     if (0 != rc)
     {
         int saved_errno = errno;
@@ -127,10 +126,10 @@ int main(int argc, char **argv)
 
     // loop a bit while the pushbutton is pressed or not
     int loops = 10;
-    while(loops--)
+    while (loops--)
     {
-    print_line_request_info(line_request_in);
-    sleep(1);
+        print_line_request_info(line_request_in);
+        sleep(1);
     }
 
     /////////////////////////////////////////////
