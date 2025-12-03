@@ -192,7 +192,7 @@ int main(int argc, char **argv)
     printf("Settings object set to input\n");
     enum gpiod_line_value values_in[] = {GPIOD_LINE_VALUE_INACTIVE};
     rc = gpiod_line_config_set_output_values(line_config_in, values_in, count_of(values_in));
-    printf("line set to output and set active\n");
+    printf("line set to input and set active\n");
 
     unsigned int offsets_in[] = {20}; // NEED TO MATCH COUNT OF ELEMENTS IN values_in[]
     rc = gpiod_line_config_add_line_settings(line_config_in, offsets_in, count_of(offsets_in) , settings_in);

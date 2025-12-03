@@ -88,7 +88,7 @@ The following section has been updated.
 |GPIO line settings|https://libgpiod.readthedocs.io/en/latest/core_line_settings.html|`05-GPIO-line-settings`|complete|
 |GPIO line configuration|https://libgpiod.readthedocs.io/en/latest/core_line_config.html#|`06-GPIO-line-configuration`|complete|
 |GPIO request configuration|https://libgpiod.readthedocs.io/en/latest/core_request_config.html|`07-GPIO-request-configuration`|complete|
-|GPIO line request|https://libgpiod.readthedocs.io/en/latest/core_line_request.html|08-GPIO-line-request|working, more to do|
+|GPIO line request|https://libgpiod.readthedocs.io/en/latest/core_line_request.html|`08-GPIO-line-request`|complete|
 
 False V2.2 start
 

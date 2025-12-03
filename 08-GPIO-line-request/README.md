@@ -1,4 +1,4 @@
-# GPIO chip
+# GPIO line request
 
 * <https://libgpiod.readthedocs.io/en/latest/core_line_request.html>
 
@@ -149,4 +149,6 @@ gpiod_line_settings added to gpiod_line_config
 hbarta@drogo:~/Programming/GPIOD_Debian_Raspberry_Pi/08-GPIO-line-request $ 
 ```
 
-Last 10 repeats of line information reflect '`' when the switch is open and '0' when the switch is closed and the input pulled to ground.
+Last 10 repeats of line information reflect '1' when the switch is open and '0' when the switch is closed and the input pulled to ground.
+
+A feeble attempt to compine things was unsuccessful. A second call to `gpiod_chip_request_lines() usaing the same `struct gpiod_request_config` resulted in `Device or resource busy`. It seems that inputs could be grouped with other inputs and outputs with other outputs but it seems unlikely that inputs and outputs can be grouped together.
