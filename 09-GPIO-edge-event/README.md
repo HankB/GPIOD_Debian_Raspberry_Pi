@@ -1,4 +1,4 @@
-# GPIO cedge eventip
+# GPIO edge event
 
 * <https://libgpiod.readthedocs.io/en/latest/core_edge_event.html>
 

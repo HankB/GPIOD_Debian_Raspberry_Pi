@@ -63,7 +63,7 @@ sudo apt install gpiod libgpiod3 libgpiod-dev
 ## References
 
 
-* Github repo <https://github.com/brgl/libgpiod>
+* Github repo <https://github.com/brgl/libgpiod> with examples.
 * Current kernel repo <https://git.kernel.org/pub/scm/libs/libgpiod/libgpiod.git/about/>
 * `libgpiod` `doxygen` docs <https://libgpiod.readthedocs.io/en/latest/index.html> (V2)
 
@@ -89,7 +89,7 @@ The following section has been updated.
 |GPIO line configuration|https://libgpiod.readthedocs.io/en/latest/core_line_config.html#|`06-GPIO-line-configuration`|complete|
 |GPIO request configuration|https://libgpiod.readthedocs.io/en/latest/core_request_config.html|`07-GPIO-request-configuration`|complete|
 |GPIO line request|https://libgpiod.readthedocs.io/en/latest/core_line_request.html|`08-GPIO-line-request`|complete|
-|GPIO edge event|https://libgpiod.readthedocs.io/en/latest/core_edge_event.html|`09-GPIO-edge-event`|WIP, output code removed"|
+|GPIO edge event|https://libgpiod.readthedocs.io/en/latest/core_edge_event.html|`09-GPIO-edge-event`|working, need cleanup|
 False V2.2 start
 
 |name|Doc page|dir|status|
