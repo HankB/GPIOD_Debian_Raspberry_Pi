@@ -19,7 +19,7 @@ line-settings
 line-configuration
 request-configuration
 line-request
-
+edge-event
 
 # VS Code cruft
 .vscode/
