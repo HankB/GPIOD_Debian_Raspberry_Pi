@@ -44,10 +44,6 @@ int main(int argc, char **argv)
         perror("Can't open chip:");
         return (errno);
     }
-    else
-    {
-        printf("opened chip '%s'\n\n", chip_name);
-    }
 
     /////////////////////////////////////////////
     // line settings, input GPIO20
@@ -62,6 +58,7 @@ int main(int argc, char **argv)
 
         exit(errno);
     }
+
     if (-1 == gpiod_line_settings_set_direction(settings_in, GPIOD_LINE_DIRECTION_INPUT))
     {
         int saved_errno = errno;
@@ -107,7 +104,7 @@ int main(int argc, char **argv)
         exit(saved_error);
     }
 
-    unsigned int offsets_in[] = {20}; 
+    unsigned int offsets_in[] = {20};
     int rc = gpiod_line_config_add_line_settings(line_config_in, offsets_in, count_of(offsets_in), settings_in);
     if (0 != rc)
     {
@@ -145,18 +142,28 @@ int main(int argc, char **argv)
     }
 
     // loop a bit while the pushbutton is pressed or not
-    int loops = 10;
-    while (loops--)
+
+    unsigned long long ts_previous = 0; // to calculate delta nanoseconds between events
+    while (1)
     {
-        printf("events pending:%d\n", gpiod_line_request_wait_edge_events(line_request_in, 5000000000));
+        if (1 != gpiod_line_request_wait_edge_events(line_request_in, 5000000000)) // no pending event?
+        {
+            break;
+        }
         int event_count = gpiod_line_request_read_edge_events(line_request_in, edge_event_buffer, 5);
-        printf("events read:%u\n", event_count);
+        printf("events to read:%u\n", event_count);
         for (unsigned long i = 0; i < event_count; i++)
         {
             struct gpiod_edge_event *event = gpiod_edge_event_buffer_get_event(edge_event_buffer, i);
-            printf("   type:%s, timestamp:%llu\n",
+            unsigned long long ts = gpiod_edge_event_get_timestamp_ns(event);
+            printf("ix:%lu GPIO:%u type:%s, global_seqno:%lu line_seqno:%lu timestamp:%llu delta:%llu\n",
+                   i,
+                   gpiod_edge_event_get_line_offset(event),
                    event_type_to_str(gpiod_edge_event_get_event_type(event)),
-                   gpiod_edge_event_get_timestamp_ns(event));
+                   gpiod_edge_event_get_global_seqno(event),
+                   gpiod_edge_event_get_line_seqno(event),
+                   ts, ts - ts_previous);
+            ts_previous = ts;
         }
     }
 

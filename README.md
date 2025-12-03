@@ -69,10 +69,11 @@ sudo apt install gpiod libgpiod3 libgpiod-dev
 
 ## GPIO access
 
-This is not an issue with RPiOS and testiung with Debian has not yet been done. Ownership tweaks are listed in the `GPIOD_V1.6` branch.
+This is not an issue with RPiOS and testing with Debian has not yet been done. Ownership tweaks are listed in the `GPIOD_V1.6` branch.
 
 ## Status 
 
+* 2025-12-03 Portions relating to the online docs are complete.
 * 2025-11-26 Revise this README.
 * 2025-11-26 Update CLI operations.
 
@@ -84,28 +85,11 @@ The following section has been updated.
 |GPIO chip|<https://libgpiod.readthedocs.io/en/latest/core_chips.html#>|`01-GPIO-chip`|complete|
 |GPIO chip info|<https://libgpiod.readthedocs.io/en/latest/core_chip_info.html#>|`02-GPIO-chip-info`|complete|
 |GPIO line information|https://libgpiod.readthedocs.io/en/latest/core_line_info.html#>|`03-GPIO-line-information`|complete|
-|GPIO line watch|<https://libgpiod.readthedocs.io/en/latest/core_line_watch.html>|`04-GPIO-line-watch`|WIP, will return|
+|GPIO line watch|<https://libgpiod.readthedocs.io/en/latest/core_line_watch.html>|`04-GPIO-line-watch`|complete|
 |GPIO line settings|https://libgpiod.readthedocs.io/en/latest/core_line_settings.html|`05-GPIO-line-settings`|complete|
 |GPIO line configuration|https://libgpiod.readthedocs.io/en/latest/core_line_config.html#|`06-GPIO-line-configuration`|complete|
 |GPIO request configuration|https://libgpiod.readthedocs.io/en/latest/core_request_config.html|`07-GPIO-request-configuration`|complete|
 |GPIO line request|https://libgpiod.readthedocs.io/en/latest/core_line_request.html|`08-GPIO-line-request`|complete|
-|GPIO edge event|https://libgpiod.readthedocs.io/en/latest/core_edge_event.html|`09-GPIO-edge-event`|working, need cleanup|
-False V2.2 start
-
-|name|Doc page|dir|status|
-|---|---|---|---|
-|libgpiod core API|https://libgpiod.readthedocs.io/en/latest/core_api.html|`Core`|chip, line info (complete)|
-|Setting line configuration|<https://libgpiod.readthedocs.io/en/latest/core_line_config.html>|`line_config`|WIP|
-|Reading & setting line values|<file:///usr/share/doc/libgpiod-dev/html/group__line__value.html>|`line_IO`|not yet|
-
-The following sections are from the `GPIOD_V1.6` branch.
-
-|name|Doc page|dir|status|
-|---|---|---|---|
-|High-level API|<file:///usr/share/doc/libgpiod-dev/html/group__high__level.html>|`C_blinky`|done|
-|GPIO chip operations|<file:///usr/share/doc/libgpiod-dev/html/group__chips.html>|`chip_operations`|done|
-|Line info|<file:///usr/share/doc/libgpiod-dev/html/group__line__info.html>|`line_info`|done|
-|Line requests|<file:///usr/share/doc/libgpiod-dev/html/group__line__request.html>|`line_request`|done|
-|Line events handling|<file:///usr/share/doc/libgpiod-dev/html/group__line__event.html>|`line_events`|done|
+|GPIO edge event|https://libgpiod.readthedocs.io/en/latest/core_edge_event.html|`09-GPIO-edge-event`|complete|
 
 [^1]: Most of my use of GPIO code is on Pi Zeroes so that is the environment chosen for this test. Using Debian on a Pi Zero with the 1-wire protocol has been a challenge.
