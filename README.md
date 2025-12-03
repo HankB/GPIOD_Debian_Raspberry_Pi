@@ -85,8 +85,10 @@ The following section has been updated.
 |GPIO chip info|<https://libgpiod.readthedocs.io/en/latest/core_chip_info.html#>|`02-GPIO-chip-info`|complete|
 |GPIO line information|https://libgpiod.readthedocs.io/en/latest/core_line_info.html#>|`03-GPIO-line-information`|complete|
 |GPIO line watch|<https://libgpiod.readthedocs.io/en/latest/core_line_watch.html>|`04-GPIO-line-watch`|WIP, will return|
-|GPIO line settings|https://libgpiod.readthedocs.io/en/latest/core_line_settings.html|`05-GPIO-line-settings`|
-|GPIO line configuration|https://libgpiod.readthedocs.io/en/latest/core_line_config.html#|`06-GPIO-line-configuration`|
+|GPIO line settings|https://libgpiod.readthedocs.io/en/latest/core_line_settings.html|`05-GPIO-line-settings`|complete|
+|GPIO line configuration|https://libgpiod.readthedocs.io/en/latest/core_line_config.html#|`06-GPIO-line-configuration`|complete|
+|GPIO request configuration|https://libgpiod.readthedocs.io/en/latest/core_request_config.html|`07-GPIO-request-configuration`|complete|
+|GPIO line request|https://libgpiod.readthedocs.io/en/latest/core_line_request.html|08-GPIO-line-request|working, more to do|
 
 False V2.2 start
 
