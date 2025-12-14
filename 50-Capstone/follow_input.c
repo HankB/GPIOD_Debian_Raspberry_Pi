@@ -152,7 +152,6 @@ int main(int argc, char **argv)
         return -1;
     }
 
-    unsigned long long ts_previous = 0; // to calculate delta nanoseconds between events
     while (1)
     {
         if (1 != gpiod_line_request_wait_edge_events(input, 5000000000)) // no pending event for 5s?
@@ -165,14 +164,10 @@ int main(int argc, char **argv)
         {
             struct gpiod_edge_event *event = gpiod_edge_event_buffer_get_event(events, i);
             unsigned long long ts = gpiod_edge_event_get_timestamp_ns(event);
-            printf("ix:%lu GPIO:%u type:%s, global_seqno:%lu line_seqno:%lu timestamp:%llu delta:%llu\n",
-                   i,
+            printf("GPIO:%u type:%s, timestamp:%llu\n",
                    gpiod_edge_event_get_line_offset(event),
                    event_type_to_str(gpiod_edge_event_get_event_type(event)),
-                   gpiod_edge_event_get_global_seqno(event),
-                   gpiod_edge_event_get_line_seqno(event),
-                   ts, ts - ts_previous);
-            ts_previous = ts;
+                   ts);
         }
     }
 
