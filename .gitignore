@@ -20,6 +20,7 @@ line-configuration
 request-configuration
 line-request
 edge-event
+follow_input
 
 # VS Code cruft
 .vscode/
