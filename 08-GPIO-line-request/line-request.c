@@ -12,7 +12,7 @@ Build:
 #include <errno.h>
 
 static const char *chip_name = "/dev/gpiochip0";
-#define count_of(x) (sizeof(x)/sizeof(x[0]))
+#define count_of(x) (sizeof(x) / sizeof(x[0]))
 
 static void print_line_request_info(struct gpiod_line_request *request)
 {
@@ -97,7 +97,7 @@ int main(int argc, char **argv)
     printf("line set to output and set active\n");
 
     unsigned int offsets_out[] = {8}; // NEED TO MATCH COUNT OF ELEMENTS IN values_out[]
-    rc = gpiod_line_config_add_line_settings(line_config_out, offsets_out, count_of(offsets_out) , settings_out);
+    rc = gpiod_line_config_add_line_settings(line_config_out, offsets_out, count_of(offsets_out), settings_out);
     if (0 != rc)
     {
         int saved_errno = errno;
@@ -145,7 +145,7 @@ int main(int argc, char **argv)
 
     /////////////////////////////////////////////
     // Start configuration of input line
-    // 
+    //
     // request configuration/input
     /////////////////////////////////////////////
     struct gpiod_request_config *config_request_in = gpiod_request_config_new();
@@ -195,7 +195,7 @@ int main(int argc, char **argv)
     printf("line set to input and set active\n");
 
     unsigned int offsets_in[] = {20}; // NEED TO MATCH COUNT OF ELEMENTS IN values_in[]
-    rc = gpiod_line_config_add_line_settings(line_config_in, offsets_in, count_of(offsets_in) , settings_in);
+    rc = gpiod_line_config_add_line_settings(line_config_in, offsets_in, count_of(offsets_in), settings_in);
     if (0 != rc)
     {
         int saved_errno = errno;
@@ -223,21 +223,21 @@ int main(int argc, char **argv)
 
     // loop a bit while the pushbutton is pressed or not
     int loops = 10;
-    while(loops--)
+    while (loops--)
     {
-    print_line_request_info(line_request_in);
-    sleep(1);
+        print_line_request_info(line_request_in);
+        sleep(1);
     }
 
     /////////////////////////////////////////////
     // release all resources
     /////////////////////////////////////////////
     gpiod_line_request_release(line_request_in);
-    //gpiod_line_request_release(line_request_out);
+    // gpiod_line_request_release(line_request_out);
     gpiod_line_settings_free(settings_in);
-    //gpiod_line_settings_free(settings_out);
+    // gpiod_line_settings_free(settings_out);
     gpiod_request_config_free(config_request_in);
-    //gpiod_request_config_free(config_request_out);
+    // gpiod_request_config_free(config_request_out);
     gpiod_chip_close(chip);
 
     return 0;

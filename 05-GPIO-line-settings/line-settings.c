@@ -22,13 +22,12 @@ int main(int argc, char **argv)
     }
     printf("Settings object acquired\n");
     printf("   direction: %d\n", gpiod_line_settings_get_direction(settings));
-    printf("      change: %d\n", 
-        gpiod_line_settings_set_direction(settings, GPIOD_LINE_DIRECTION_INPUT));
+    printf("      change: %d\n",
+           gpiod_line_settings_set_direction(settings, GPIOD_LINE_DIRECTION_INPUT));
     printf("   direction: %d\n", gpiod_line_settings_get_direction(settings));
-    printf("      change: %d\n", 
-        gpiod_line_settings_set_direction(settings, GPIOD_LINE_DIRECTION_OUTPUT));
+    printf("      change: %d\n",
+           gpiod_line_settings_set_direction(settings, GPIOD_LINE_DIRECTION_OUTPUT));
     printf("   direction: %d\n", gpiod_line_settings_get_direction(settings));
-
 
     gpiod_line_settings_free(settings);
     return 0;

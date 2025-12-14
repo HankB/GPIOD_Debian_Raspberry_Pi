@@ -9,7 +9,7 @@ Build:
 #include <stdio.h>
 #include <gpiod.h>
 #include <errno.h>
-#include<unistd.h>
+#include <unistd.h>
 
 int main(int argc, char **argv)
 {
@@ -36,7 +36,7 @@ int main(int argc, char **argv)
            gpiod_line_settings_set_direction(settings, GPIOD_LINE_DIRECTION_OUTPUT));
     enum gpiod_line_value values[] = {GPIOD_LINE_VALUE_INACTIVE};
     int rc = gpiod_line_config_set_output_values(config, values, 1);
-    printf( "line set to output and set active\n");
+    printf("line set to output and set active\n");
 
     unsigned int offsets[1] = {8};
     rc = gpiod_line_config_add_line_settings(config, offsets, 1, settings);

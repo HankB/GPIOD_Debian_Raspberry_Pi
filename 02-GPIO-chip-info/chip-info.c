@@ -16,33 +16,36 @@ int main(int argc, char **argv)
     printf("API version:%s:\n", gpiod_api_version());
 
     // open the chip
-    struct gpiod_chip * p_chip = gpiod_chip_open(chip_name);
-    if (NULL == p_chip) {
+    struct gpiod_chip *p_chip = gpiod_chip_open(chip_name);
+    if (NULL == p_chip)
+    {
         perror("Can't open chip:");
-        return(errno);
+        return (errno);
     }
-    else {
+    else
+    {
         printf("opened chip '%s'\n\n", chip_name);
     }
 
     // fetch chip info
-    struct gpiod_chip_info * p_info = gpiod_chip_get_info(p_chip);
-    if(NULL == p_info) {
+    struct gpiod_chip_info *p_info = gpiod_chip_get_info(p_chip);
+    if (NULL == p_info)
+    {
         perror("Can't get chip info:");
         int save_errno = errno;
         gpiod_chip_close(p_chip);
-        return(save_errno);
+        return (save_errno);
     }
-    else {
-        printf( "  Info for chip:%s\n"
-                "           name:%s\n"
-                "          label:%s\n"
-                "number of lines:%d\n",
-            chip_name,
-            gpiod_chip_info_get_name(p_info),
-            gpiod_chip_info_get_label(p_info),
-            gpiod_chip_info_get_num_lines(p_info)
-        );
+    else
+    {
+        printf("  Info for chip:%s\n"
+               "           name:%s\n"
+               "          label:%s\n"
+               "number of lines:%d\n",
+               chip_name,
+               gpiod_chip_info_get_name(p_info),
+               gpiod_chip_info_get_label(p_info),
+               gpiod_chip_info_get_num_lines(p_info));
     }
 
     // release resources

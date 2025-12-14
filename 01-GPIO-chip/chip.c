@@ -14,10 +14,10 @@ static const char *chip_name = "/dev/gpiochip0";
 static void print_line_info(struct gpiod_line_info *p_info)
 {
     printf("line info for:%s\n"
-        "       direction:%d\n"
-        "\n",
-        gpiod_line_info_get_name(p_info),
-        gpiod_line_info_get_direction(p_info) );
+           "       direction:%d\n"
+           "\n",
+           gpiod_line_info_get_name(p_info),
+           gpiod_line_info_get_direction(p_info));
 }
 
 int main(int argc, char **argv)
@@ -25,66 +25,74 @@ int main(int argc, char **argv)
     printf("API version:%s:\n", gpiod_api_version());
 
     // open the chip
-    struct gpiod_chip * p_chip = gpiod_chip_open(chip_name);
-    if (NULL == p_chip) {
+    struct gpiod_chip *p_chip = gpiod_chip_open(chip_name);
+    if (NULL == p_chip)
+    {
         perror("Can't open chip:");
-        return(errno);
+        return (errno);
     }
-    else {
+    else
+    {
         printf("opened chip '%s'\n\n", chip_name);
     }
 
     // fetch chip info
-    struct gpiod_chip_info * p_info = gpiod_chip_get_info(p_chip);
-    if(NULL == p_info) {
+    struct gpiod_chip_info *p_info = gpiod_chip_get_info(p_chip);
+    if (NULL == p_info)
+    {
         perror("Can't get chip info:");
         int save_errno = errno;
         gpiod_chip_close(p_chip);
-        return(save_errno);
+        return (save_errno);
     }
 
     // fetch chip info for GPIO8
-    struct gpiod_line_info * p_line_info = gpiod_chip_get_line_info(p_chip, 8);
-    if(NULL == p_line_info) {
+    struct gpiod_line_info *p_line_info = gpiod_chip_get_line_info(p_chip, 8);
+    if (NULL == p_line_info)
+    {
         perror("Can't get line info:");
         int save_errno = errno;
         gpiod_chip_info_free(p_info);
         gpiod_chip_close(p_chip);
-        return(save_errno);
+        return (save_errno);
     }
-    else {
+    else
+    {
         print_line_info(p_line_info);
         gpiod_line_info_free(p_line_info);
     }
 
-        // fetch chip info for GPIO20
+    // fetch chip info for GPIO20
     p_line_info = gpiod_chip_get_line_info(p_chip, 20);
-    if(NULL == p_line_info) {
+    if (NULL == p_line_info)
+    {
         perror("Can't get line info:");
         int save_errno = errno;
         gpiod_chip_info_free(p_info);
         gpiod_chip_close(p_chip);
-        return(save_errno);
+        return (save_errno);
     }
-    else {
+    else
+    {
         print_line_info(p_line_info);
         gpiod_line_info_free(p_line_info);
     }
 
-        // fetch chip info for GPIO10
+    // fetch chip info for GPIO10
     p_line_info = gpiod_chip_get_line_info(p_chip, 10);
-    if(NULL == p_line_info) {
+    if (NULL == p_line_info)
+    {
         perror("Can't get line info:");
         int save_errno = errno;
         gpiod_chip_info_free(p_info);
         gpiod_chip_close(p_chip);
-        return(save_errno);
+        return (save_errno);
     }
-    else {
+    else
+    {
         print_line_info(p_line_info);
         gpiod_line_info_free(p_line_info);
     }
-
 
     // release resources
     gpiod_chip_info_free(p_info);
