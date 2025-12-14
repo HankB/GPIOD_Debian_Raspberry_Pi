@@ -6,7 +6,7 @@ I'm struggling to map the sub-projects (beyone CLI) to the V2.2 APIs. For thgis 
 
 ## Project
 
-Explore GPIOD on Raspberry Pi running Debian Linux.
+Explore GPIOD on Raspberry Pi running Debian Linux (or Raspberry Pi OS).
 
 This is the second generation of the project which supports GPIOD V2.x which comes with Debian/RpiOS Trixie and is not API compatible. If you need to explore GPIOD on an older host OS, checkout the branch `GPIOD_V1.6`
 
