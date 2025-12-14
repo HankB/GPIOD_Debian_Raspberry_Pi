@@ -69,7 +69,15 @@ sudo apt install gpiod libgpiod3 libgpiod-dev
 
 ## GPIO access
 
-This is not an issue with RPiOS and testing with Debian has not yet been done. Ownership tweaks are listed in the `GPIOD_V1.6` branch.
+This is not an issue with RPiOS but is with Debian. The following will fix permissions for Debian. The last two commandsd will need to be repeated following reboot.
+
+```text
+sudo addgroup gpio
+sudo usermod -aG gpio $USER
+exec su -l $USER
+sudo chown root:gpio /dev/gpiochip?
+sudo chmod g+rw /dev/gpiochip?
+```
 
 ## Status 
 
