@@ -1,8 +1,12 @@
 /*
 Drive output on GPIO 8 to match the input on GPIO 24
 
-Logs of copy and paste from examples at
+Lots of copy and paste from examples at
 https://github.com/brgl/libgpiod/tree/master/examples
+(as well as my examples.)
+
+Build:
+gcc -o follow_input -Wall follow_input.c -lgpiod
 */
 
 #include <errno.h>
