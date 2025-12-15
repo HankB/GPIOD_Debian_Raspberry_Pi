@@ -163,8 +163,8 @@ struct gpiod_line_request *init_output_gpio(unsigned int GPIO_number)
         goto free_settings;
     }
 
-    if(gpiod_line_settings_set_output_value(settings_out,
-                                         GPIOD_LINE_VALUE_INACTIVE) != 0)
+    if (gpiod_line_settings_set_output_value(settings_out,
+                                             GPIOD_LINE_VALUE_INACTIVE) != 0)
     {
         perror("gpiod_line_settings_set_output_value()");
         goto free_settings;
@@ -181,7 +181,7 @@ struct gpiod_line_request *init_output_gpio(unsigned int GPIO_number)
     }
 
     unsigned int offsets_out[] = {GPIO_number};
-    if(gpiod_line_config_add_line_settings(line_config_out, offsets_out, count_of(offsets_out), settings_out) != 0)
+    if (gpiod_line_config_add_line_settings(line_config_out, offsets_out, count_of(offsets_out), settings_out) != 0)
     {
         perror("gpiod_line_config_add_line_settings()");
         goto free_settings;
@@ -207,7 +207,7 @@ struct gpiod_line_request *init_output_gpio(unsigned int GPIO_number)
     if (NULL == line_request_out)
     {
         perror("gpiod_chip_request_lines()");
-    }    
+    }
 
     gpiod_request_config_free(config_request_out);
 
@@ -219,11 +219,30 @@ close_chip:
     return line_request_out;
 }
 
+enum gpiod_line_value get_input(struct gpiod_line_request *input,
+                                struct gpiod_edge_event_buffer *events,
+                                unsigned int timeout_s)
+{
+    enum gpiod_line_value val = GPIOD_LINE_VALUE_ERROR;
+    if (1 == gpiod_line_request_wait_edge_events(input, timeout_s * 1000000000)) // no pending event for 5s?
+    {
+        int event_count = gpiod_line_request_read_edge_events(input, events, 5);
+        printf("events to read:%u\n", event_count);
+        for (unsigned long i = 0; i < event_count; i++)
+        {
+            struct gpiod_edge_event *event = gpiod_edge_event_buffer_get_event(events, i);
+            val = gpiod_edge_event_get_event_type(event);
+        }
+    }
+    return val; // return last event if multiple
+}
+
 int main(int argc, char **argv)
 {
     struct gpiod_line_request *input;
     struct gpiod_line_request *output;
     struct gpiod_edge_event_buffer *events;
+    enum gpiod_line_value input_value;
 
     input = init_input_gpio(20);
     if (NULL == input)
@@ -242,21 +261,8 @@ int main(int argc, char **argv)
 
     while (1)
     {
-        if (1 != gpiod_line_request_wait_edge_events(input, 5000000000)) // no pending event for 5s?
-        {
-            break;
-        }
-        int event_count = gpiod_line_request_read_edge_events(input, events, 5);
-        printf("events to read:%u\n", event_count);
-        for (unsigned long i = 0; i < event_count; i++)
-        {
-            struct gpiod_edge_event *event = gpiod_edge_event_buffer_get_event(events, i);
-            unsigned long long ts = gpiod_edge_event_get_timestamp_ns(event);
-            printf("GPIO:%u type:%s, timestamp:%llu\n",
-                   gpiod_edge_event_get_line_offset(event),
-                   event_type_to_str(gpiod_edge_event_get_event_type(event)),
-                   ts);
-        }
+        input_value = get_input(input, events, 5);
+        printf("input:%s\n", event_type_to_str(input_value));
     }
 
     return 0;
