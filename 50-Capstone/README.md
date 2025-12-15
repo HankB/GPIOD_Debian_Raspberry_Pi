@@ -10,6 +10,13 @@ Reflect the state of a GPIO input to a GPIO output. The H/W configuration will b
 * Demonstrate responding to an input by changing an output. (I have another project that uses this pattern.)
 * Provide a simplified project that involves both GPIO input and output, albeit waiting for the input change vs. reading (polling) the input.
 
+## Status
+
+* 2025-12-14 working on Debian Bookworm 32 bit (with libgpiod form backports.)
+* 2025-12-14 working on RPiOS Trixie 32 bit.
+
+Done - Next!
+
 ## 2025-12-14 Plan
 
 ### Functions
