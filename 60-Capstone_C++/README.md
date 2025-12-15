@@ -7,6 +7,7 @@ The pure C version is still a bit wordy at nearly 300 lines. The C++ APIs should
 ## Status
 
 * 2025-12-14 Chip info
+* 2025-12-15 Working input
 
 ## Build
 
