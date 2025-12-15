@@ -2,7 +2,7 @@
 
 /*
 Build
-g++ -Wall -o follow_input follow_input.cpp -lgpiodcxx
+g++ -Wall -o follow_input follow_input.cpp -lgpiodcxxstd
 */
 
 #include <iostream>
@@ -15,6 +15,8 @@ namespace
     /* Example configuration - customize to suit your situation. */
     const ::filesystem::path chip_path("/dev/gpiochip0");
     const ::gpiod::line::offset input_line_offset = 20;
+    const ::gpiod::line::offset output_line_offset = 8;
+    const unsigned long long timeout = 5; // timeout in seconds
 
     const char *edge_event_type_str(const ::gpiod::edge_event &event)
     {
@@ -54,10 +56,10 @@ int main(int argc, char **argv)
     cout << "empty buffer holds " << events.num_events() << " events"
          << " and has a capacity of " << events.capacity() << endl;
 
-    // from the GPIOD example watch_line_rising.cpp except we
-    // want both rising and falling events.
+    // input processing from the GPIOD example watch_line_rising.cpp 
+    // except we want both rising and falling events and a timeout.
 
-    auto request =
+    auto input_request =
             chip.prepare_request()
             .set_consumer("watch-line-value")
             .add_line_settings(
@@ -70,8 +72,9 @@ int main(int argc, char **argv)
             .do_request();
 
 	for (;;) {
+        bool has_events = input_request.wait_edge_events(timeout * 1000000000);
 		/* Blocks until at least one event is available. */
-		request.read_edge_events(events);
+		input_request.read_edge_events(events);
 
 		for (const auto &event : events)
 			::cout << "line: " << event.line_offset()
