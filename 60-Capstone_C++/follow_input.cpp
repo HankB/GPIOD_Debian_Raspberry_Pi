@@ -67,6 +67,8 @@ int main(int argc, char **argv)
                 ::gpiod::line_settings()
                     .set_direction(
                         ::gpiod::line::direction::INPUT)
+                    .set_bias(
+                        ::gpiod::line::bias::PULL_UP)
                     .set_edge_detection(
                         ::gpiod::line::edge::BOTH))
             .do_request();
