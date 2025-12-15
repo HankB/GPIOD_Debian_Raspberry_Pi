@@ -270,7 +270,7 @@ int main(int argc, char **argv)
     {
         input_value = get_input(input, events, 5);
         printf("input:%s\n", event_type_to_str(input_value));
-        set_output(output, output_gpio, input_value);
+        set_output(output, output_gpio, (input_value==GPIOD_LINE_VALUE_ACTIVE)?1:0);
     }
 
     return 0;
