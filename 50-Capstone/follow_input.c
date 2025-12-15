@@ -240,8 +240,8 @@ enum gpiod_line_value get_input(struct gpiod_line_request *input,
 
 int set_output(struct gpiod_line_request *output, int gpio, enum gpiod_line_value output_val)
 {
-        int rc = gpiod_line_request_set_value(output, gpio, output_val);
-        return rc;
+    int rc = gpiod_line_request_set_value(output, gpio, output_val);
+    return rc;
 }
 
 int main(int argc, char **argv)
@@ -265,12 +265,21 @@ int main(int argc, char **argv)
     }
 
     output = init_output_gpio(output_gpio);
+    if (NULL == output)
+    {
+        fprintf(stderr, "init_output_gpio()");
+        return -1;
+    }
 
     while (input_value != GPIOD_LINE_VALUE_ERROR)
     {
         input_value = get_input(input, events, 5);
         printf("input:%s\n", event_type_to_str(input_value));
-        set_output(output, output_gpio, (input_value==GPIOD_LINE_VALUE_ACTIVE)?1:0);
+        if (-1 == set_output(output, output_gpio, (input_value == GPIOD_LINE_VALUE_ACTIVE) ? 1 : 0))
+        {
+            fprintf(stderr, "set_output()");
+            return -1;
+        }
     }
 
     return 0;
