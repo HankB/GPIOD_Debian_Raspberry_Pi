@@ -27,5 +27,9 @@ int main(int argc, char **argv)
     }
     gpiod::chip_info info = chip.get_info();
     cout << "name:" << info.name() << " label:" << info.label() << endl;
+
+    gpiod::edge_event_buffer events;
+    cout << "empty buffer holds " << events.num_events() << " events" 
+        << " and has a capacity of " << events.capacity() << endl;
     chip.close();
 }
