@@ -86,6 +86,10 @@ int main(int argc, char **argv)
                     ::gpiod::line::direction::OUTPUT))
             .do_request();
 
+    // initialize the output to match the input
+    output_request.set_value(output_line_offset,
+                             input_request.get_value(input_line_offset));
+
     while (input_request.wait_edge_events(timeout))
     {
 
