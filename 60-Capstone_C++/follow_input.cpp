@@ -16,7 +16,7 @@ namespace
     const ::filesystem::path chip_path("/dev/gpiochip0");
     const ::gpiod::line::offset input_line_offset = 20;
     const ::gpiod::line::offset output_line_offset = 8;
-    const ::chrono::nanoseconds timeout = 5; // timeout in seconds
+    auto timeout = ::chrono::nanoseconds((long long unsigned)5*1000000000); // timeout in nano-seconds
 
     const char *edge_event_type_str(const ::gpiod::edge_event &event)
     {
@@ -71,7 +71,7 @@ int main(int argc, char **argv)
                         ::gpiod::line::edge::BOTH))
             .do_request();
 
-    while (input_request.wait_edge_events(timeout * 1000000000))
+    while (input_request.wait_edge_events(timeout))
     {
 
         /* Blocks until at least one event is available. */
