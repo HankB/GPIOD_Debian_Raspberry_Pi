@@ -18,7 +18,7 @@ Recent explorations demonstrate that Debian (not Debian based Raspberry Pi OS AK
 
 Here is a brief survey of the current situation WRT GPIO libraries (and specifically for programs written in C) as of 2025-11-26.
 
-* `WiringPi` [WiringPi](http://wiringpi.com/) seems to have been the most popular but has been abandoned by the original developer. There is a popular fork that appears to be under development by volunteers. The most recent commit was 2025-06-06.
+* `WiringPi` [WiringPi](http://wiringpi.com/) seems to have been the most popular but has been set aside by the original developer. There is a [popular fork on Github](https://github.com/WiringPi/WiringPi) that appears to be under development by volunteers. The most recent commit as of 2025-12-15 was 2025-06-06.
 * `pigpio` and `lg` also looked good, but the dev (Joan) got tired of trying to keep up with kernel changes and these seem to be languishing. (<https://github.com/joan2937/pigpio>, <https://github.com/joan2937/lg>) (Four years and one year since last commit, respectively.)
 * `libgpiod` seems to be the heir apparent and V2.2 is now in the Trixie repos for both Debian And RPiOS. The most recent commit was 9 days ago (<https://git.kernel.org/pub/scm/libs/libgpiod/libgpiod.git/>.)
 
