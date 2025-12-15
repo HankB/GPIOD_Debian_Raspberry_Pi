@@ -18,6 +18,8 @@ gcc -o follow_input -Wall follow_input.c -lgpiod
 
 static const char *chip_name = "/dev/gpiochip0";
 static const char *consumer = "follower";
+static const int input_gpio = 20;
+static const int output_gpio = 8;
 
 // used to report input changes
 static const char *event_type_to_str(enum gpiod_edge_event_type type)
@@ -236,6 +238,12 @@ enum gpiod_line_value get_input(struct gpiod_line_request *input,
     return val; // return last event if multiple
 }
 
+int set_output(struct gpiod_line_request *output, int gpio, enum gpiod_line_value output_val)
+{
+        int rc = gpiod_line_request_set_value(output, gpio, output_val);
+        return rc;
+}
+
 int main(int argc, char **argv)
 {
     struct gpiod_line_request *input;
@@ -243,7 +251,7 @@ int main(int argc, char **argv)
     struct gpiod_edge_event_buffer *events;
     enum gpiod_line_value input_value;
 
-    input = init_input_gpio(20);
+    input = init_input_gpio(input_gpio);
     if (NULL == input)
     {
         fprintf(stderr, "init_input_gpio()");
@@ -256,12 +264,13 @@ int main(int argc, char **argv)
         return -1;
     }
 
-    output = init_output_gpio(8);
+    output = init_output_gpio(output_gpio);
 
     while (input_value != GPIOD_LINE_VALUE_ERROR)
     {
         input_value = get_input(input, events, 5);
         printf("input:%s\n", event_type_to_str(input_value));
+        set_output(output, output_gpio, input_value);
     }
 
     return 0;
