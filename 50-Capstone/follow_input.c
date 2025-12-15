@@ -129,14 +129,100 @@ struct gpiod_edge_event_buffer *configure_edge_events(struct gpiod_line_request 
         gpiod_edge_event_buffer_new(0); // create default size buffer
     if (NULL == edge_event_buffer)
     {
-        perror("gpiod_chip_request_lines()");
+        perror("gpiod_edge_event_buffer_new()");
     }
     return edge_event_buffer;
+}
+
+struct gpiod_line_request *init_output_gpio(unsigned int GPIO_number)
+{
+    /////////////////////////////////////////////
+    // open the chip
+    /////////////////////////////////////////////
+    struct gpiod_chip *chip = gpiod_chip_open(chip_name);
+    if (NULL == chip)
+    {
+        perror("Can't open chip:");
+        return NULL;
+    }
+
+    /////////////////////////////////////////////
+    // line settings
+    /////////////////////////////////////////////
+    struct gpiod_line_settings *settings_out = gpiod_line_settings_new();
+    if (NULL == settings_out)
+    {
+        perror("gpiod_line_settings_new()");
+        goto close_chip;
+    }
+
+    if (gpiod_line_settings_set_direction(settings_out,
+                                          GPIOD_LINE_DIRECTION_OUTPUT) != 0)
+    {
+        perror("gpiod_line_settings_set_direction()");
+        goto free_settings;
+    }
+
+    if(gpiod_line_settings_set_output_value(settings_out,
+                                         GPIOD_LINE_VALUE_INACTIVE) != 0)
+    {
+        perror("gpiod_line_settings_set_output_value()");
+        goto free_settings;
+    }
+
+    /////////////////////////////////////////////
+    // line config
+    /////////////////////////////////////////////
+    struct gpiod_line_config *line_config_out = gpiod_line_config_new();
+    if (NULL == line_config_out)
+    {
+        perror("gpiod_line_config_new()");
+        goto free_settings;
+    }
+
+    unsigned int offsets_out[] = {GPIO_number};
+    if(gpiod_line_config_add_line_settings(line_config_out, offsets_out, count_of(offsets_out), settings_out) != 0)
+    {
+        perror("gpiod_line_config_add_line_settings()");
+        goto free_settings;
+    }
+
+    /////////////////////////////////////////////
+    // request configuration
+    /////////////////////////////////////////////
+    struct gpiod_request_config *config_request_out = gpiod_request_config_new();
+    if (NULL == config_request_out)
+    {
+        perror("gpiod_request_config_new()");
+        goto close_chip;
+    }
+
+    gpiod_request_config_set_consumer(config_request_out, consumer);
+
+    /////////////////////////////////////////////
+    // line request
+    /////////////////////////////////////////////
+    struct gpiod_line_request *line_request_out = gpiod_chip_request_lines(
+        chip, config_request_out, line_config_out);
+    if (NULL == line_request_out)
+    {
+        perror("gpiod_chip_request_lines()");
+    }    
+
+    gpiod_request_config_free(config_request_out);
+
+free_settings:
+    gpiod_line_settings_free(settings_out);
+
+close_chip:
+    gpiod_chip_close(chip);
+    return line_request_out;
 }
 
 int main(int argc, char **argv)
 {
     struct gpiod_line_request *input;
+    struct gpiod_line_request *output;
     struct gpiod_edge_event_buffer *events;
 
     input = init_input_gpio(20);
@@ -151,6 +237,8 @@ int main(int argc, char **argv)
         fprintf(stderr, "init_input_gpio()");
         return -1;
     }
+
+    output = init_output_gpio(8);
 
     while (1)
     {
