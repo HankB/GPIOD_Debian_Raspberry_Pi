@@ -9,6 +9,28 @@ g++ -Wall -o follow_input follow_input.cpp -lgpiodcxx
 using namespace std;
 #include <gpiod.hpp>
 
+namespace
+{
+
+    /* Example configuration - customize to suit your situation. */
+    const ::filesystem::path chip_path("/dev/gpiochip0");
+    const ::gpiod::line::offset input_line_offset = 20;
+
+    const char *edge_event_type_str(const ::gpiod::edge_event &event)
+    {
+        switch (event.type())
+        {
+        case ::gpiod::edge_event::event_type::RISING_EDGE:
+            return "Rising";
+        case ::gpiod::edge_event::event_type::FALLING_EDGE:
+            return "Falling";
+        default:
+            return "Unknown";
+        }
+    }
+
+} /* namespace */
+
 int main(int argc, char **argv)
 {
     cout << "GPIOD version " << gpiod::api_version() << endl;
@@ -29,7 +51,33 @@ int main(int argc, char **argv)
     cout << "name:" << info.name() << " label:" << info.label() << endl;
 
     gpiod::edge_event_buffer events;
-    cout << "empty buffer holds " << events.num_events() << " events" 
-        << " and has a capacity of " << events.capacity() << endl;
+    cout << "empty buffer holds " << events.num_events() << " events"
+         << " and has a capacity of " << events.capacity() << endl;
+
+    // from the GPIOD example watch_line_rising.cpp except we
+    // want both rising and falling events.
+
+    auto request =
+            chip.prepare_request()
+            .set_consumer("watch-line-value")
+            .add_line_settings(
+                input_line_offset,
+                ::gpiod::line_settings()
+                    .set_direction(
+                        ::gpiod::line::direction::INPUT)
+                    .set_edge_detection(
+                        ::gpiod::line::edge::BOTH))
+            .do_request();
+
+	for (;;) {
+		/* Blocks until at least one event is available. */
+		request.read_edge_events(events);
+
+		for (const auto &event : events)
+			::cout << "line: " << event.line_offset()
+				    << "  type: " << ::setw(7) << ::left << edge_event_type_str(event)
+				    << "  event #" << event.line_seqno()
+				    << ::endl;
+	}
     chip.close();
 }
