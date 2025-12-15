@@ -16,7 +16,8 @@ namespace
     const ::filesystem::path chip_path("/dev/gpiochip0");
     const ::gpiod::line::offset input_line_offset = 20;
     const ::gpiod::line::offset output_line_offset = 8;
-    auto timeout = ::chrono::nanoseconds((long long unsigned)5*1000000000); // timeout in nano-seconds
+    auto timeout = ::chrono::nanoseconds((long long unsigned)5 * 1000000000); // timeout in nano-seconds
+    const char *consumer = "C++ follower";
 
     const char *edge_event_type_str(const ::gpiod::edge_event &event)
     {
@@ -61,7 +62,7 @@ int main(int argc, char **argv)
 
     auto input_request =
         chip.prepare_request()
-            .set_consumer("watch-line-value")
+            .set_consumer(consumer)
             .add_line_settings(
                 input_line_offset,
                 ::gpiod::line_settings()
@@ -73,6 +74,18 @@ int main(int argc, char **argv)
                         ::gpiod::line::edge::BOTH))
             .do_request();
 
+    // output processing copied substantially from toggle_line_value.cpp
+
+    auto output_request =
+        ::gpiod::chip(chip_path)
+            .prepare_request()
+            .set_consumer(consumer)
+            .add_line_settings(
+                output_line_offset,
+                ::gpiod::line_settings().set_direction(
+                    ::gpiod::line::direction::OUTPUT))
+            .do_request();
+
     while (input_request.wait_edge_events(timeout))
     {
 
@@ -80,10 +93,14 @@ int main(int argc, char **argv)
         input_request.read_edge_events(events);
 
         for (const auto &event : events)
+        {
+
             ::cout << "line: " << event.line_offset()
                    << "  type: " << ::setw(7) << ::left << edge_event_type_str(event)
                    << "  event #" << event.line_seqno()
                    << ::endl;
+            output_request.set_value(output_line_offset, (event.type() == ::gpiod::edge_event::event_type::RISING_EDGE) ? gpiod::line::value::ACTIVE : gpiod::line::value::INACTIVE);
+        }
     }
 
     chip.close();
